@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Iva\\Documents\\godina3\\letnji\\vp\\projekat\\vp_projekat\\projekat\\Common\\Common.csproj": {}
+    "C:\\Users\\Iva\\Documents\\godina3\\letnji\\vp\\vp_projekat\\projekat\\Common\\Common.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Iva\\Documents\\godina3\\letnji\\vp\\projekat\\vp_projekat\\projekat\\Common\\Common.csproj": {
+    "C:\\Users\\Iva\\Documents\\godina3\\letnji\\vp\\vp_projekat\\projekat\\Common\\Common.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\vp\\projekat\\vp_projekat\\projekat\\Common\\Common.csproj",
+        "projectUniqueName": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\vp\\vp_projekat\\projekat\\Common\\Common.csproj",
         "projectName": "Common",
-        "projectPath": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\vp\\projekat\\vp_projekat\\projekat\\Common\\Common.csproj",
+        "projectPath": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\vp\\vp_projekat\\projekat\\Common\\Common.csproj",
         "packagesPath": "C:\\Users\\Iva\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\vp\\projekat\\vp_projekat\\projekat\\Common\\obj\\",
+        "outputPath": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\vp\\vp_projekat\\projekat\\Common\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
