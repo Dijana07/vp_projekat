@@ -1,8 +1,49 @@
-﻿namespace Common
+﻿using System;
+using System.Runtime.Serialization;
+using System.Threading.Tasks;
+namespace Common
 {
-    [Data]
+    [DataContract]
     public class WeatherSample
     {
+
+        [DataMember]
+        public double T { get; set; }
+
+        [DataMember]
+        public double Pressure { get; set; }
+
+        [DataMember]
+        public double Tpot { get; set; }
+
+        [DataMember]
+        public double Tdew { get; set; }
+
+        [DataMember]
+        public double Rh { get; set; }
+
+        [DataMember]
+        public double Sh { get; set; }
+
+        [DataMember]
+        public DateTime Date { get; set; }
+
+
+        public WeatherSample()
+        {
+        }
+
+        public WeatherSample(double t, double pressure, double tpot, double tdew, double rh, double sh, DateTime date)
+        {
+            T = t;
+            Pressure = pressure;
+            Tpot = tpot;
+            Tdew = tdew;
+            Rh = rh;
+            Sh = sh;
+            Date = date;
+        }
+
 
     }
 }
