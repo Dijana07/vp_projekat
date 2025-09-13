@@ -3,16 +3,14 @@
   "WorkspaceRootPath": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\vp\\vp_projekat\\projekat\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{FEBC2B2C-B45A-4562-BFE0-B4F8463A329D}|Common\\Common.csproj|c:\\users\\iva\\documents\\godina3\\letnji\\vp\\vp_projekat\\projekat\\common\\weathersample.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{FEBC2B2C-B45A-4562-BFE0-B4F8463A329D}|Common\\Common.csproj|solutionrelative:common\\weathersample.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|Service||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{40D3D0CE-8190-4E11-ACF0-AB1FA596C188}|Service\\Service.csproj|C:\\Users\\Iva\\Documents\\godina3\\letnji\\vp\\vp_projekat\\projekat\\service\\serviceprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{40D3D0CE-8190-4E11-ACF0-AB1FA596C188}|Service\\Service.csproj|solutionrelative:service\\serviceprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{40D3D0CE-8190-4E11-ACF0-AB1FA596C188}|Service\\Service.csproj|C:\\Users\\Iva\\Documents\\godina3\\letnji\\vp\\vp_projekat\\projekat\\service\\transfermetaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{40D3D0CE-8190-4E11-ACF0-AB1FA596C188}|Service\\Service.csproj|solutionrelative:service\\transfermetaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{31D478C4-4C18-4DFF-81D1-60DCAB6CFE42}|Client\\Client.csproj|C:\\Users\\Iva\\Documents\\godina3\\letnji\\vp\\vp_projekat\\projekat\\client\\clientprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{31D478C4-4C18-4DFF-81D1-60DCAB6CFE42}|Client\\Client.csproj|solutionrelative:client\\clientprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{40D3D0CE-8190-4E11-ACF0-AB1FA596C188}|Service\\Service.csproj|c:\\users\\iva\\documents\\godina3\\letnji\\vp\\vp_projekat\\projekat\\service\\||{B270807C-D8C6-49EB-8EBE-8E8D566637A1}|5e9a8ac2-4f34-4521-858f-4c248ba31532"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,39 +25,26 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "WeatherSample.cs",
-              "DocumentMoniker": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\vp\\vp_projekat\\projekat\\Common\\WeatherSample.cs",
-              "RelativeDocumentMoniker": "Common\\WeatherSample.cs",
-              "ToolTip": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\vp\\vp_projekat\\projekat\\Common\\WeatherSample.cs*",
-              "RelativeToolTip": "Common\\WeatherSample.cs*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-11T22:06:03.644Z",
+              "Title": "Service",
+              "DocumentMoniker": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\vp\\vp_projekat\\projekat\\Service\\Service.csproj",
+              "RelativeDocumentMoniker": "Service\\Service.csproj",
+              "ToolTip": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\vp\\vp_projekat\\projekat\\Service\\Service.csproj",
+              "RelativeToolTip": "Service\\Service.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-09-13T09:33:38.048Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "ServiceProgram.cs",
-              "DocumentMoniker": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\vp\\vp_projekat\\projekat\\Service\\ServiceProgram.cs",
-              "RelativeDocumentMoniker": "Service\\ServiceProgram.cs",
-              "ToolTip": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\vp\\vp_projekat\\projekat\\Service\\ServiceProgram.cs",
-              "RelativeToolTip": "Service\\ServiceProgram.cs",
+              "Title": "TransferMetaService.cs",
+              "DocumentMoniker": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\vp\\vp_projekat\\projekat\\Service\\TransferMetaService.cs",
+              "RelativeDocumentMoniker": "Service\\TransferMetaService.cs",
+              "ToolTip": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\vp\\vp_projekat\\projekat\\Service\\TransferMetaService.cs",
+              "RelativeToolTip": "Service\\TransferMetaService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-11T22:05:26.586Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ClientProgram.cs",
-              "DocumentMoniker": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\vp\\vp_projekat\\projekat\\Client\\ClientProgram.cs",
-              "RelativeDocumentMoniker": "Client\\ClientProgram.cs",
-              "ToolTip": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\vp\\vp_projekat\\projekat\\Client\\ClientProgram.cs",
-              "RelativeToolTip": "Client\\ClientProgram.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-11T22:03:25.652Z"
+              "WhenOpened": "2025-09-12T23:29:27.885Z"
             }
           ]
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,10 +7,21 @@ using System.Threading.Tasks;
 
 namespace Service
 {
-    internal class ServiceProgram
+    public class TransferMetaService : ITransferMeta
     {
-        static void Main(string[] args)
+        public bool EndSession()
         {
+            throw new NotImplementedException();
+        }
+
+        public bool PushSample(WeatherSample sample)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool StartSession(WeatherSample meta)
+        {
+            throw new NotImplementedException();
         }
     }
 }

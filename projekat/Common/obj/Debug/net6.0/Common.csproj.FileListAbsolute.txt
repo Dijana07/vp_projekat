@@ -1,0 +1,5 @@
+C:\Users\Iva\Documents\godina3\letnji\vp\vp_projekat\projekat\Common\obj\Debug\net6.0\Common.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Iva\Documents\godina3\letnji\vp\vp_projekat\projekat\Common\obj\Debug\net6.0\Common.AssemblyInfoInputs.cache
+C:\Users\Iva\Documents\godina3\letnji\vp\vp_projekat\projekat\Common\obj\Debug\net6.0\Common.AssemblyInfo.cs
+C:\Users\Iva\Documents\godina3\letnji\vp\vp_projekat\projekat\Common\obj\Debug\net6.0\Common.csproj.CoreCompileInputs.cache
+C:\Users\Iva\Documents\godina3\letnji\vp\vp_projekat\projekat\Common\obj\Debug\net6.0\Common.sourcelink.json
