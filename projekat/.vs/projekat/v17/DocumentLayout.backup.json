@@ -1,20 +1,22 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\vp\\vp_projekat\\projekat\\",
+  "WorkspaceRootPath": "G:\\vp\\projekat\\projekat\\",
   "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|Client||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
+    },
     {
       "AbsoluteMoniker": "D:0:0:{00000000-0000-0000-0000-000000000000}|\u003CSolution\u003E|Service||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{FEBC2B2C-B45A-4562-BFE0-B4F8463A329D}|Common\\Common.csproj|c:\\users\\iva\\documents\\godina3\\letnji\\vp\\vp_projekat\\projekat\\common\\common.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|",
-      "RelativeMoniker": "D:0:0:{FEBC2B2C-B45A-4562-BFE0-B4F8463A329D}|Common\\Common.csproj|solutionrelative:common\\common.csproj||{04B8AB82-A572-4FEF-95CE-5222444B6B64}|"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{40D3D0CE-8190-4E11-ACF0-AB1FA596C188}|Service\\Service.csproj|C:\\Users\\Iva\\Documents\\godina3\\letnji\\vp\\vp_projekat\\projekat\\service\\transfermetaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{40D3D0CE-8190-4E11-ACF0-AB1FA596C188}|Service\\Service.csproj|G:\\vp\\projekat\\projekat\\service\\transfermetaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{40D3D0CE-8190-4E11-ACF0-AB1FA596C188}|Service\\Service.csproj|solutionrelative:service\\transfermetaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{40D3D0CE-8190-4E11-ACF0-AB1FA596C188}|Service\\Service.csproj|c:\\users\\iva\\documents\\godina3\\letnji\\vp\\vp_projekat\\projekat\\service\\||{B270807C-D8C6-49EB-8EBE-8E8D566637A1}|5e9a8ac2-4f34-4521-858f-4c248ba31532"
+      "AbsoluteMoniker": "D:0:0:{40D3D0CE-8190-4E11-ACF0-AB1FA596C188}|Service\\Service.csproj|g:\\vp\\projekat\\projekat\\service\\||{B270807C-D8C6-49EB-8EBE-8E8D566637A1}|5e9a8ac2-4f34-4521-858f-4c248ba31532"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31D478C4-4C18-4DFF-81D1-60DCAB6CFE42}|Client\\Client.csproj|g:\\vp\\projekat\\projekat\\client\\||{B270807C-D8C6-49EB-8EBE-8E8D566637A1}|5e9a8ac2-4f34-4521-858f-4c248ba31532"
     }
   ],
   "DocumentGroupContainers": [
@@ -24,15 +26,31 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "Client",
+              "DocumentMoniker": "G:\\vp\\projekat\\projekat\\Client\\Client.csproj",
+              "RelativeDocumentMoniker": "Client\\Client.csproj",
+              "ToolTip": "G:\\vp\\projekat\\projekat\\Client\\Client.csproj",
+              "RelativeToolTip": "Client\\Client.csproj",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2025-09-13T16:22:16.457Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "Service",
-              "DocumentMoniker": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\vp\\vp_projekat\\projekat\\Service\\Service.csproj",
+              "DocumentMoniker": "G:\\vp\\projekat\\projekat\\Service\\Service.csproj",
               "RelativeDocumentMoniker": "Service\\Service.csproj",
-              "ToolTip": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\vp\\vp_projekat\\projekat\\Service\\Service.csproj",
+              "ToolTip": "G:\\vp\\projekat\\projekat\\Service\\Service.csproj",
               "RelativeToolTip": "Service\\Service.csproj",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
               "WhenOpened": "2025-09-13T09:33:38.048Z",
@@ -40,23 +58,11 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Common",
-              "DocumentMoniker": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\vp\\vp_projekat\\projekat\\Common\\Common.csproj",
-              "RelativeDocumentMoniker": "Common\\Common.csproj",
-              "ToolTip": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\vp\\vp_projekat\\projekat\\Common\\Common.csproj",
-              "RelativeToolTip": "Common\\Common.csproj",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-09-12T23:29:33.476Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 2,
               "Title": "TransferMetaService.cs",
-              "DocumentMoniker": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\vp\\vp_projekat\\projekat\\Service\\TransferMetaService.cs",
+              "DocumentMoniker": "G:\\vp\\projekat\\projekat\\Service\\TransferMetaService.cs",
               "RelativeDocumentMoniker": "Service\\TransferMetaService.cs",
-              "ToolTip": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\vp\\vp_projekat\\projekat\\Service\\TransferMetaService.cs",
+              "ToolTip": "G:\\vp\\projekat\\projekat\\Service\\TransferMetaService.cs",
               "RelativeToolTip": "Service\\TransferMetaService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
