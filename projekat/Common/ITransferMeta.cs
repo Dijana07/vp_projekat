@@ -11,7 +11,7 @@ namespace Common
     public interface ITransferMeta
     {
         [OperationContract]
-        bool StartSession(WeatherSample meta);
+        FileManipulation StartSession(WeatherSample meta);
         [OperationContract]
         bool PushSample(WeatherSample sample);
         [OperationContract]

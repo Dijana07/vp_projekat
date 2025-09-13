@@ -5,3 +5,14 @@ C:\Users\Iva\Documents\godina3\letnji\vp\vp_projekat\projekat\Client\obj\Debug\C
 C:\Users\Iva\Documents\godina3\letnji\vp\vp_projekat\projekat\Client\obj\Debug\Client.csproj.CoreCompileInputs.cache
 C:\Users\Iva\Documents\godina3\letnji\vp\vp_projekat\projekat\Client\obj\Debug\Client.exe
 C:\Users\Iva\Documents\godina3\letnji\vp\vp_projekat\projekat\Client\obj\Debug\Client.pdb
+C:\Users\Iva\Documents\godina3\letnji\virtuelizacija\vp_projekat\projekat\Client\obj\Debug\Client.csproj.AssemblyReference.cache
+C:\Users\Iva\Documents\godina3\letnji\virtuelizacija\vp_projekat\projekat\Client\obj\Debug\Client.exe.config
+C:\Users\Iva\Documents\godina3\letnji\virtuelizacija\vp_projekat\projekat\Client\obj\Debug\Client.csproj.CoreCompileInputs.cache
+C:\Users\Iva\Documents\godina3\letnji\virtuelizacija\vp_projekat\projekat\Client\obj\Debug\Client.exe
+C:\Users\Iva\Documents\godina3\letnji\virtuelizacija\vp_projekat\projekat\Client\obj\Debug\Client.pdb
+C:\Users\Iva\Documents\godina3\letnji\virtuelizacija\vp_projekat\projekat\Client\bin\Debug\Client.exe.config
+C:\Users\Iva\Documents\godina3\letnji\virtuelizacija\vp_projekat\projekat\Client\bin\Debug\Client.exe
+C:\Users\Iva\Documents\godina3\letnji\virtuelizacija\vp_projekat\projekat\Client\bin\Debug\Client.pdb
+C:\Users\Iva\Documents\godina3\letnji\virtuelizacija\vp_projekat\projekat\Client\bin\Debug\Common.dll
+C:\Users\Iva\Documents\godina3\letnji\virtuelizacija\vp_projekat\projekat\Client\bin\Debug\Common.pdb
+C:\Users\Iva\Documents\godina3\letnji\virtuelizacija\vp_projekat\projekat\Client\obj\Debug\Client.csproj.Up2Date

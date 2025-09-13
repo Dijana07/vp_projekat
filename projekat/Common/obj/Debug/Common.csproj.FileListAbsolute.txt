@@ -1,0 +1,6 @@
+C:\Users\Iva\Documents\godina3\letnji\virtuelizacija\vp_projekat\projekat\Common\bin\Debug\Common.dll
+C:\Users\Iva\Documents\godina3\letnji\virtuelizacija\vp_projekat\projekat\Common\bin\Debug\Common.pdb
+C:\Users\Iva\Documents\godina3\letnji\virtuelizacija\vp_projekat\projekat\Common\obj\Debug\Common.csproj.AssemblyReference.cache
+C:\Users\Iva\Documents\godina3\letnji\virtuelizacija\vp_projekat\projekat\Common\obj\Debug\Common.csproj.CoreCompileInputs.cache
+C:\Users\Iva\Documents\godina3\letnji\virtuelizacija\vp_projekat\projekat\Common\obj\Debug\Common.dll
+C:\Users\Iva\Documents\godina3\letnji\virtuelizacija\vp_projekat\projekat\Common\obj\Debug\Common.pdb
