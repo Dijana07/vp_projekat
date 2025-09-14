@@ -1,42 +1,62 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\virtuelizacija\\vp_projekat\\projekat\\",
+  "WorkspaceRootPath": "G:\\vp\\projekat\\projekat\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{40D3D0CE-8190-4E11-ACF0-AB1FA596C188}|Service\\Service.csproj|c:\\users\\iva\\documents\\godina3\\letnji\\virtuelizacija\\vp_projekat\\projekat\\service\\transfermetaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{40D3D0CE-8190-4E11-ACF0-AB1FA596C188}|Service\\Service.csproj|solutionrelative:service\\transfermetaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{491E77E7-0BEA-42EF-A610-E41CC62E89BE}|Common\\Common.csproj|C:\\Users\\Iva\\Documents\\godina3\\letnji\\virtuelizacija\\vp_projekat\\projekat\\common\\weathersample.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{491E77E7-0BEA-42EF-A610-E41CC62E89BE}|Common\\Common.csproj|solutionrelative:common\\weathersample.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{40D3D0CE-8190-4E11-ACF0-AB1FA596C188}|Service\\Service.csproj|C:\\Users\\Iva\\Documents\\godina3\\letnji\\virtuelizacija\\vp_projekat\\projekat\\service\\serviceprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{40D3D0CE-8190-4E11-ACF0-AB1FA596C188}|Service\\Service.csproj|g:\\vp\\projekat\\projekat\\service\\serviceprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{40D3D0CE-8190-4E11-ACF0-AB1FA596C188}|Service\\Service.csproj|solutionrelative:service\\serviceprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{31D478C4-4C18-4DFF-81D1-60DCAB6CFE42}|Client\\Client.csproj|C:\\Users\\Iva\\Documents\\godina3\\letnji\\virtuelizacija\\vp_projekat\\projekat\\client\\clientprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{31D478C4-4C18-4DFF-81D1-60DCAB6CFE42}|Client\\Client.csproj|g:\\vp\\projekat\\projekat\\client\\clientprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{31D478C4-4C18-4DFF-81D1-60DCAB6CFE42}|Client\\Client.csproj|solutionrelative:client\\clientprogram.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{40D3D0CE-8190-4E11-ACF0-AB1FA596C188}|Service\\Service.csproj|C:\\Users\\Iva\\Documents\\godina3\\letnji\\virtuelizacija\\vp_projekat\\projekat\\service\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{40D3D0CE-8190-4E11-ACF0-AB1FA596C188}|Service\\Service.csproj|solutionrelative:service\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+      "AbsoluteMoniker": "D:0:0:{40D3D0CE-8190-4E11-ACF0-AB1FA596C188}|Service\\Service.csproj|g:\\vp\\projekat\\projekat\\service\\transfermetaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{40D3D0CE-8190-4E11-ACF0-AB1FA596C188}|Service\\Service.csproj|solutionrelative:service\\transfermetaservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{491E77E7-0BEA-42EF-A610-E41CC62E89BE}|Common\\Common.csproj|C:\\Users\\Iva\\Documents\\godina3\\letnji\\virtuelizacija\\vp_projekat\\projekat\\common\\filemanipulation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{491E77E7-0BEA-42EF-A610-E41CC62E89BE}|Common\\Common.csproj|solutionrelative:common\\filemanipulation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{40D3D0CE-8190-4E11-ACF0-AB1FA596C188}|Service\\Service.csproj|g:\\vp\\projekat\\projekat\\service\\warningeventargs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{40D3D0CE-8190-4E11-ACF0-AB1FA596C188}|Service\\Service.csproj|solutionrelative:service\\warningeventargs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{31D478C4-4C18-4DFF-81D1-60DCAB6CFE42}|Client\\Client.csproj|C:\\Users\\Iva\\Documents\\godina3\\letnji\\virtuelizacija\\vp_projekat\\projekat\\client\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
-      "RelativeMoniker": "D:0:0:{31D478C4-4C18-4DFF-81D1-60DCAB6CFE42}|Client\\Client.csproj|solutionrelative:client\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+      "AbsoluteMoniker": "D:0:0:{40D3D0CE-8190-4E11-ACF0-AB1FA596C188}|Service\\Service.csproj|g:\\vp\\projekat\\projekat\\service\\weathersampleeventargs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{40D3D0CE-8190-4E11-ACF0-AB1FA596C188}|Service\\Service.csproj|solutionrelative:service\\weathersampleeventargs.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{491E77E7-0BEA-42EF-A610-E41CC62E89BE}|Common\\Common.csproj|C:\\Users\\Iva\\Documents\\godina3\\letnji\\virtuelizacija\\vp_projekat\\projekat\\common\\itransfermeta.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{491E77E7-0BEA-42EF-A610-E41CC62E89BE}|Common\\Common.csproj|g:\\vp\\projekat\\projekat\\common\\itransfermeta.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{491E77E7-0BEA-42EF-A610-E41CC62E89BE}|Common\\Common.csproj|solutionrelative:common\\itransfermeta.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{491E77E7-0BEA-42EF-A610-E41CC62E89BE}|Common\\Common.csproj|C:\\Users\\Iva\\Documents\\godina3\\letnji\\virtuelizacija\\vp_projekat\\projekat\\common\\customexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{491E77E7-0BEA-42EF-A610-E41CC62E89BE}|Common\\Common.csproj|solutionrelative:common\\customexception.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|G:\\vp\\projekat\\projekat\\Service\\bin\\Debug\\Service.exe.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Service\\bin\\Debug\\Service.exe.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{40D3D0CE-8190-4E11-ACF0-AB1FA596C188}|Service\\Service.csproj|g:\\vp\\projekat\\projekat\\service\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{40D3D0CE-8190-4E11-ACF0-AB1FA596C188}|Service\\Service.csproj|solutionrelative:service\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{31D478C4-4C18-4DFF-81D1-60DCAB6CFE42}|Client\\Client.csproj|g:\\vp\\projekat\\projekat\\client\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{31D478C4-4C18-4DFF-81D1-60DCAB6CFE42}|Client\\Client.csproj|solutionrelative:client\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|G:\\vp\\projekat\\projekat\\Client\\bin\\Debug\\Client.exe.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:Client\\bin\\Debug\\Client.exe.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{491E77E7-0BEA-42EF-A610-E41CC62E89BE}|Common\\Common.csproj|g:\\vp\\projekat\\projekat\\common\\filemanipulation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{491E77E7-0BEA-42EF-A610-E41CC62E89BE}|Common\\Common.csproj|solutionrelative:common\\filemanipulation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{491E77E7-0BEA-42EF-A610-E41CC62E89BE}|Common\\Common.csproj|g:\\vp\\projekat\\projekat\\common\\dataformatfault.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{491E77E7-0BEA-42EF-A610-E41CC62E89BE}|Common\\Common.csproj|solutionrelative:common\\dataformatfault.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{491E77E7-0BEA-42EF-A610-E41CC62E89BE}|Common\\Common.csproj|g:\\vp\\projekat\\projekat\\common\\validationfault.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{491E77E7-0BEA-42EF-A610-E41CC62E89BE}|Common\\Common.csproj|solutionrelative:common\\validationfault.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{491E77E7-0BEA-42EF-A610-E41CC62E89BE}|Common\\Common.csproj|g:\\vp\\projekat\\projekat\\common\\weathersample.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{491E77E7-0BEA-42EF-A610-E41CC62E89BE}|Common\\Common.csproj|solutionrelative:common\\weathersample.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -49,113 +69,190 @@
           "SelectedChildIndex": 4,
           "Children": [
             {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "App.config",
-              "DocumentMoniker": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\virtuelizacija\\vp_projekat\\projekat\\Client\\App.config",
-              "RelativeDocumentMoniker": "Client\\App.config",
-              "ToolTip": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\virtuelizacija\\vp_projekat\\projekat\\Client\\App.config",
-              "RelativeToolTip": "Client\\App.config",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAcwBIAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2025-09-13T18:22:45.807Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "FileManipulation.cs",
-              "DocumentMoniker": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\virtuelizacija\\vp_projekat\\projekat\\Common\\FileManipulation.cs",
-              "RelativeDocumentMoniker": "Common\\FileManipulation.cs",
-              "ToolTip": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\virtuelizacija\\vp_projekat\\projekat\\Common\\FileManipulation.cs",
-              "RelativeToolTip": "Common\\FileManipulation.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-13T18:03:20.155Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "App.config",
-              "DocumentMoniker": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\virtuelizacija\\vp_projekat\\projekat\\Service\\App.config",
-              "RelativeDocumentMoniker": "Service\\App.config",
-              "ToolTip": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\virtuelizacija\\vp_projekat\\projekat\\Service\\App.config",
-              "RelativeToolTip": "Service\\App.config",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAA4AAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
-              "WhenOpened": "2025-09-13T17:22:42.364Z"
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "ClientProgram.cs",
-              "DocumentMoniker": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\virtuelizacija\\vp_projekat\\projekat\\Client\\ClientProgram.cs",
-              "RelativeDocumentMoniker": "Client\\ClientProgram.cs",
-              "ToolTip": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\virtuelizacija\\vp_projekat\\projekat\\Client\\ClientProgram.cs",
-              "RelativeToolTip": "Client\\ClientProgram.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAQwAwAAAAnAAAAAAAAAA==",
+              "Title": "WarningEventArgs.cs",
+              "DocumentMoniker": "G:\\vp\\projekat\\projekat\\Service\\WarningEventArgs.cs",
+              "RelativeDocumentMoniker": "Service\\WarningEventArgs.cs",
+              "ToolTip": "G:\\vp\\projekat\\projekat\\Service\\WarningEventArgs.cs",
+              "RelativeToolTip": "Service\\WarningEventArgs.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-13T17:14:13.066Z"
+              "WhenOpened": "2025-09-14T13:20:33.882Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ITransferMeta.cs",
+              "DocumentMoniker": "G:\\vp\\projekat\\projekat\\Common\\ITransferMeta.cs",
+              "RelativeDocumentMoniker": "Common\\ITransferMeta.cs",
+              "ToolTip": "G:\\vp\\projekat\\projekat\\Common\\ITransferMeta.cs",
+              "RelativeToolTip": "Common\\ITransferMeta.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAgwBkAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-14T13:04:06.38Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "TransferMetaService.cs",
+              "DocumentMoniker": "G:\\vp\\projekat\\projekat\\Service\\TransferMetaService.cs",
+              "RelativeDocumentMoniker": "Service\\TransferMetaService.cs",
+              "ToolTip": "G:\\vp\\projekat\\projekat\\Service\\TransferMetaService.cs",
+              "RelativeToolTip": "Service\\TransferMetaService.cs",
+              "ViewState": "AgIAABAAAAAAMjMzMzMLwEgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-14T08:32:02.143Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "TransferMetaService.cs",
-              "DocumentMoniker": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\virtuelizacija\\vp_projekat\\projekat\\Service\\TransferMetaService.cs",
-              "RelativeDocumentMoniker": "Service\\TransferMetaService.cs",
-              "ToolTip": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\virtuelizacija\\vp_projekat\\projekat\\Service\\TransferMetaService.cs",
-              "RelativeToolTip": "Service\\TransferMetaService.cs",
-              "ViewState": "AgIAAE8AAAAAAAAAAAASwCQAAAATAAAAAAAAAA==",
+              "Title": "ServiceProgram.cs",
+              "DocumentMoniker": "G:\\vp\\projekat\\projekat\\Service\\ServiceProgram.cs",
+              "RelativeDocumentMoniker": "Service\\ServiceProgram.cs",
+              "ToolTip": "G:\\vp\\projekat\\projekat\\Service\\ServiceProgram.cs",
+              "RelativeToolTip": "Service\\ServiceProgram.cs",
+              "ViewState": "AgIAAAoAAAAAAAAAAAA8wBMAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-12T23:29:27.885Z",
+              "WhenOpened": "2025-09-14T08:32:00.125Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "WeatherSample.cs",
-              "DocumentMoniker": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\virtuelizacija\\vp_projekat\\projekat\\Common\\WeatherSample.cs",
-              "RelativeDocumentMoniker": "Common\\WeatherSample.cs",
-              "ToolTip": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\virtuelizacija\\vp_projekat\\projekat\\Common\\WeatherSample.cs",
-              "RelativeToolTip": "Common\\WeatherSample.cs",
-              "ViewState": "AgIAABEAAAAAAAAAAAAAwAoAAAARAAAAAAAAAA==",
+              "Title": "ClientProgram.cs",
+              "DocumentMoniker": "G:\\vp\\projekat\\projekat\\Client\\ClientProgram.cs",
+              "RelativeDocumentMoniker": "Client\\ClientProgram.cs",
+              "ToolTip": "G:\\vp\\projekat\\projekat\\Client\\ClientProgram.cs",
+              "RelativeToolTip": "Client\\ClientProgram.cs",
+              "ViewState": "AgIAAKMAAAAAzczMzMwswG8AAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-13T16:31:54.806Z"
+              "WhenOpened": "2025-09-14T08:31:53.617Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ServiceProgram.cs",
-              "DocumentMoniker": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\virtuelizacija\\vp_projekat\\projekat\\Service\\ServiceProgram.cs",
-              "RelativeDocumentMoniker": "Service\\ServiceProgram.cs",
-              "ToolTip": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\virtuelizacija\\vp_projekat\\projekat\\Service\\ServiceProgram.cs",
-              "RelativeToolTip": "Service\\ServiceProgram.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAAwAcAAAARAAAAAAAAAA==",
+              "DocumentIndex": 4,
+              "Title": "WeatherSampleEventArgs.cs",
+              "DocumentMoniker": "G:\\vp\\projekat\\projekat\\Service\\WeatherSampleEventArgs.cs",
+              "RelativeDocumentMoniker": "Service\\WeatherSampleEventArgs.cs",
+              "ToolTip": "G:\\vp\\projekat\\projekat\\Service\\WeatherSampleEventArgs.cs",
+              "RelativeToolTip": "Service\\WeatherSampleEventArgs.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-13T19:16:42.964Z"
+              "WhenOpened": "2025-09-14T12:56:18.235Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "ITransferMeta.cs",
-              "DocumentMoniker": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\virtuelizacija\\vp_projekat\\projekat\\Common\\ITransferMeta.cs",
-              "RelativeDocumentMoniker": "Common\\ITransferMeta.cs",
-              "ToolTip": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\virtuelizacija\\vp_projekat\\projekat\\Common\\ITransferMeta.cs",
-              "RelativeToolTip": "Common\\ITransferMeta.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAYAAAAAAAAAA==",
+              "Title": "App.config",
+              "DocumentMoniker": "G:\\vp\\projekat\\projekat\\Service\\App.config",
+              "RelativeDocumentMoniker": "Service\\App.config",
+              "ToolTip": "G:\\vp\\projekat\\projekat\\Service\\App.config",
+              "RelativeToolTip": "Service\\App.config",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAwAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-09-14T08:19:14.801Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "ValidationFault.cs",
+              "DocumentMoniker": "G:\\vp\\projekat\\projekat\\Common\\ValidationFault.cs",
+              "RelativeDocumentMoniker": "Common\\ValidationFault.cs",
+              "ToolTip": "G:\\vp\\projekat\\projekat\\Common\\ValidationFault.cs",
+              "RelativeToolTip": "Common\\ValidationFault.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-13T16:30:52.365Z"
+              "WhenOpened": "2025-09-14T08:22:22.031Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "DataFormatFault.cs",
+              "DocumentMoniker": "G:\\vp\\projekat\\projekat\\Common\\DataFormatFault.cs",
+              "RelativeDocumentMoniker": "Common\\DataFormatFault.cs",
+              "ToolTip": "G:\\vp\\projekat\\projekat\\Common\\DataFormatFault.cs",
+              "RelativeToolTip": "Common\\DataFormatFault.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAoAAAAgAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-14T08:21:20.465Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 8,
-              "Title": "CustomException.cs",
-              "DocumentMoniker": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\virtuelizacija\\vp_projekat\\projekat\\Common\\CustomException.cs",
-              "RelativeDocumentMoniker": "Common\\CustomException.cs",
-              "ToolTip": "C:\\Users\\Iva\\Documents\\godina3\\letnji\\virtuelizacija\\vp_projekat\\projekat\\Common\\CustomException.cs",
-              "RelativeToolTip": "Common\\CustomException.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAAAkAAAAEAAAAAAAAAA==",
+              "Title": "App.config",
+              "DocumentMoniker": "G:\\vp\\projekat\\projekat\\Client\\App.config",
+              "RelativeDocumentMoniker": "Client\\App.config",
+              "ToolTip": "G:\\vp\\projekat\\projekat\\Client\\App.config",
+              "RelativeToolTip": "Client\\App.config",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABkAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-09-14T08:16:07.176Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "Service.exe.config",
+              "DocumentMoniker": "G:\\vp\\projekat\\projekat\\Service\\bin\\Debug\\Service.exe.config",
+              "RelativeDocumentMoniker": "Service\\bin\\Debug\\Service.exe.config",
+              "ToolTip": "G:\\vp\\projekat\\projekat\\Service\\bin\\Debug\\Service.exe.config",
+              "RelativeToolTip": "Service\\bin\\Debug\\Service.exe.config",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAqwA8AAAAMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-09-14T09:52:01.02Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Client.exe.config",
+              "DocumentMoniker": "G:\\vp\\projekat\\projekat\\Client\\bin\\Debug\\Client.exe.config",
+              "RelativeDocumentMoniker": "Client\\bin\\Debug\\Client.exe.config",
+              "ToolTip": "G:\\vp\\projekat\\projekat\\Client\\bin\\Debug\\Client.exe.config",
+              "RelativeToolTip": "Client\\bin\\Debug\\Client.exe.config",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABkAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000601|",
+              "WhenOpened": "2025-09-14T09:58:27.209Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "FileManipulation.cs",
+              "DocumentMoniker": "G:\\vp\\projekat\\projekat\\Common\\FileManipulation.cs",
+              "RelativeDocumentMoniker": "Common\\FileManipulation.cs",
+              "ToolTip": "G:\\vp\\projekat\\projekat\\Common\\FileManipulation.cs",
+              "RelativeToolTip": "Common\\FileManipulation.cs",
+              "ViewState": "AgIAABsAAAAAAAAAAAAwwCwAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-13T16:27:07.71Z"
+              "WhenOpened": "2025-09-14T08:14:58.21Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "WeatherSample.cs",
+              "DocumentMoniker": "G:\\vp\\projekat\\projekat\\Common\\WeatherSample.cs",
+              "RelativeDocumentMoniker": "Common\\WeatherSample.cs",
+              "ToolTip": "G:\\vp\\projekat\\projekat\\Common\\WeatherSample.cs",
+              "RelativeToolTip": "Common\\WeatherSample.cs",
+              "ViewState": "AgIAACAAAAAAAAAAAAA8wAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-09-14T08:09:50.991Z",
+              "EditorCaption": ""
             }
           ]
         }

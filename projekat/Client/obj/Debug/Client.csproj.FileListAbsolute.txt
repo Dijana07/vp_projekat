@@ -16,3 +16,13 @@ C:\Users\Iva\Documents\godina3\letnji\virtuelizacija\vp_projekat\projekat\Client
 C:\Users\Iva\Documents\godina3\letnji\virtuelizacija\vp_projekat\projekat\Client\bin\Debug\Common.dll
 C:\Users\Iva\Documents\godina3\letnji\virtuelizacija\vp_projekat\projekat\Client\bin\Debug\Common.pdb
 C:\Users\Iva\Documents\godina3\letnji\virtuelizacija\vp_projekat\projekat\Client\obj\Debug\Client.csproj.Up2Date
+G:\vp\projekat\projekat\Client\bin\Debug\Client.exe.config
+G:\vp\projekat\projekat\Client\bin\Debug\Client.exe
+G:\vp\projekat\projekat\Client\bin\Debug\Client.pdb
+G:\vp\projekat\projekat\Client\bin\Debug\Common.dll
+G:\vp\projekat\projekat\Client\bin\Debug\Common.pdb
+G:\vp\projekat\projekat\Client\obj\Debug\Client.csproj.AssemblyReference.cache
+G:\vp\projekat\projekat\Client\obj\Debug\Client.csproj.CoreCompileInputs.cache
+G:\vp\projekat\projekat\Client\obj\Debug\Client.csproj.Up2Date
+G:\vp\projekat\projekat\Client\obj\Debug\Client.exe
+G:\vp\projekat\projekat\Client\obj\Debug\Client.pdb

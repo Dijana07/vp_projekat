@@ -51,6 +51,8 @@
     <Compile Include="ServiceProgram.cs" />
     <Compile Include="TransferMetaService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="WarningEventArgs.cs" />
+    <Compile Include="WeatherSampleEventArgs.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

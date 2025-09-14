@@ -43,10 +43,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CustomException.cs" />
+    <Compile Include="DataFormatFault.cs" />
     <Compile Include="FileManipulation.cs" />
     <Compile Include="ITransferMeta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ValidationFault.cs" />
     <Compile Include="WeatherSample.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

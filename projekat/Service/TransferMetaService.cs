@@ -11,85 +11,142 @@ using System.Threading.Tasks;
 
 namespace Service
 {
-
-    public class TransferMetaService : ITransferMeta
+    //ConcurrencyMode.Multiple moze da se doda da bi vise klijenaya moglo da salje podatke istovremeno
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
+    public class TransferMetaService : ITransferMeta, IDisposable
     {
+        private string dataDirectory;
+        private StreamWriter measurementsWriter;
+        private StreamWriter rejectsWriter;
+        private bool disposing = true;
+
+        public event EventHandler OnTransferStarted;
+        public event EventHandler<WeatherSampleEventArgs> OnSampleReceived;
+        public event EventHandler OnTransferCompleted;
+        public event EventHandler<WarningEventArgs> OnWarningRaised;
+
+        public TransferMetaService()
+        {
+            var relativePath = ConfigurationManager.AppSettings["DataDirectory"];
+            var basePath = AppDomain.CurrentDomain.BaseDirectory; 
+            dataDirectory = Path.GetFullPath(Path.Combine(basePath, relativePath));
+            Directory.CreateDirectory(dataDirectory);
+        }
+
         public bool EndSession()
         {
-            throw new NotImplementedException();
+            //Console.WriteLine("Transfer completed.");
+            disposing = true;
+            DisposeWriters();
+
+            OnTransferCompleted?.Invoke(this, EventArgs.Empty);
+
+            return true;
         }
 
         public bool PushSample(WeatherSample sample)
         {
-            throw new NotImplementedException();
+            // treba override to string
+            //Console.WriteLine("Transfering sample: " + sample);
+            try
+            {
+                if (measurementsWriter == null)
+                    throw new FaultException<DataFormatFault>(new DataFormatFault("Session not started."));
+
+                if (rejectsWriter == null)
+                    throw new FaultException<DataFormatFault>(new DataFormatFault("Session not started."));
+
+                if (sample.Date == DateTime.MinValue)
+                    throw new FaultException<ValidationFault>(new ValidationFault("Invalid date"));
+
+                if (sample.Rh <= 0)
+                    throw new FaultException<ValidationFault>(new ValidationFault("Relative humidity must be positive"));
+
+                if (sample.Rh < 50 || sample.Rh > 100)
+                    throw new FaultException<ValidationFault>(new ValidationFault("Relative humidity must be in range 50-100"));
+
+                //"T,Pressure,Tpot,Tdew,Rh,Sh,Date"
+                measurementsWriter.WriteLine($"{sample.T},{sample.Pressure},{sample.Tpot},{sample.Tdew},{sample.Rh},{sample.Sh},{sample.Date}");
+                measurementsWriter.Flush();
+
+                OnSampleReceived?.Invoke(this, new WeatherSampleEventArgs(sample));
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                //"T,Pressure,Tpot,Tdew,Rh,Sh,Date"
+                rejectsWriter.WriteLine($"{sample.T},{sample.Pressure},{sample.Tpot},{sample.Tdew},{sample.Rh},{sample.Sh},{sample.Date}, {ex.Message}");
+                rejectsWriter.Flush();
+
+                OnWarningRaised?.Invoke(this, new WarningEventArgs(ex.Message));
+                throw new FaultException<DataFormatFault>(new DataFormatFault(ex.Message));
+            }
         }
-        [OperationBehavior(AutoDisposeParameters = true)]
-        public FileManipulation StartSession(WeatherSample meta)
+
+        public bool StartSession(WeatherSample meta)
         {
-            string fileName = ConfigurationManager.AppSettings["startCSV"];
-            if (string.IsNullOrWhiteSpace(fileName))
-                throw new InvalidOperationException("startCSV key not found in appSettings.");
-
-           
-            string binDir = AppDomain.CurrentDomain.BaseDirectory;
-            string csvPath = Path.Combine(binDir, fileName);
-
-            var samples = new List<WeatherSample>();
-
-            using (var reader = new StreamReader(csvPath))
+            //Console.WriteLine("Session started");
+            //Console.WriteLine("Transfer in progress...");
+            disposing = false;
+            try
             {
-                string headerLine = reader.ReadLine();
-                if (headerLine == null)
-                    throw new InvalidDataException("CSV file is empty.");
+                string measurementsFile = Path.Combine(dataDirectory, ConfigurationManager.AppSettings["validCSV"]);
+                string rejectsFile = Path.Combine(dataDirectory, ConfigurationManager.AppSettings["rejectCSV"]);
 
-                var headers = headerLine.Split(',');
-                int dateIdx = Array.FindIndex(headers, h => h.Trim().Equals("date", StringComparison.OrdinalIgnoreCase));
-                int pressureIdx = Array.FindIndex(headers, h => h.Trim().Equals("p", StringComparison.OrdinalIgnoreCase));
-                int tIdx = Array.FindIndex(headers, h => h.Trim().Equals("T", StringComparison.OrdinalIgnoreCase));
-                int tpotIdx = Array.FindIndex(headers, h => h.Trim().Equals("Tpot", StringComparison.OrdinalIgnoreCase));
-                int tdewIdx = Array.FindIndex(headers, h => h.Trim().Equals("Tdew", StringComparison.OrdinalIgnoreCase));
-                int rhIdx = Array.FindIndex(headers, h => h.Trim().Equals("rh", StringComparison.OrdinalIgnoreCase));
-                int shIdx = Array.FindIndex(headers, h => h.Trim().Equals("sh", StringComparison.OrdinalIgnoreCase));
+                measurementsWriter = new StreamWriter(measurementsFile, true);
+                rejectsWriter = new StreamWriter(rejectsFile, true);
 
-                if (tIdx < 0 || pressureIdx < 0 || tpotIdx < 0 || tdewIdx < 0 || rhIdx < 0 || shIdx < 0 || dateIdx < 0)
-                    throw new InvalidDataException("CSV does not contain all required WeatherSample columns.");
+                measurementsWriter.WriteLine("T,Pressure,Tpot,Tdew,Rh,Sh,Date");
+                rejectsWriter.WriteLine("T,Pressure,Tpot,Tdew,Rh,Sh,Date, Error");
 
-                int count = 0;
-                while (!reader.EndOfStream && count < 100)
+                OnTransferStarted?.Invoke(this, EventArgs.Empty);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                OnWarningRaised?.Invoke(this, new WarningEventArgs(ex.Message));
+                throw new FaultException<DataFormatFault>(new DataFormatFault(ex.Message));
+            }
+        }
+
+        private void DisposeWriters()
+        {
+            if (disposing)
+            {
+                if (measurementsWriter != null)
                 {
-                    var line = reader.ReadLine();
-                    if (string.IsNullOrWhiteSpace(line))
-                        continue;
-
-                    var values = line.Split(',');
-
-                    var sample = new WeatherSample(
-                        double.Parse(values[tIdx], CultureInfo.InvariantCulture),
-                        double.Parse(values[pressureIdx], CultureInfo.InvariantCulture),
-                        double.Parse(values[tpotIdx], CultureInfo.InvariantCulture),
-                        double.Parse(values[tdewIdx], CultureInfo.InvariantCulture),
-                        double.Parse(values[rhIdx], CultureInfo.InvariantCulture),
-                        double.Parse(values[shIdx], CultureInfo.InvariantCulture),
-                        DateTime.Parse(values[dateIdx], CultureInfo.InvariantCulture)
-                    );
-                    samples.Add(sample);
-                    count++;
+                    try
+                    {
+                        measurementsWriter.Dispose();
+                        measurementsWriter.Close();
+                        measurementsWriter = null;
+                    }
+                    catch (Exception ex)
+                    {
+                        OnWarningRaised?.Invoke(this, new WarningEventArgs(ex.Message));
+                    }
+                }
+                if (rejectsWriter != null)
+                {
+                    try
+                    {
+                        rejectsWriter.Dispose();
+                        rejectsWriter.Close();
+                        rejectsWriter = null;
+                    }
+                    catch (Exception ex)
+                    {
+                        OnWarningRaised?.Invoke(this, new WarningEventArgs(ex.Message));
+                    }
                 }
             }
+        }
 
-            var memStream = new MemoryStream();
-            using (var writer = new StreamWriter(memStream, Encoding.UTF8, 1024, true))
-            {
-                writer.WriteLine("T,Pressure,Tpot,Tdew,Rh,Sh,Date");
-                foreach (var s in samples)
-                {
-                    writer.WriteLine($"{s.T},{s.Pressure},{s.Tpot},{s.Tdew},{s.Rh},{s.Sh},{s.Date.ToString("o", CultureInfo.InvariantCulture)}");
-                }
-                writer.Flush();
-            }
-            memStream.Position = 0;
-
-            return new FileManipulation(memStream, "WeatherSample");
+        public void Dispose()
+        {
+            DisposeWriters();
         }
     }
 }
