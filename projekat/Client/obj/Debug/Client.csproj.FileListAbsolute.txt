@@ -29,3 +29,4 @@ G:\vp\projekat\projekat\Client\obj\Debug\Client.pdb
 C:\Users\Iva\Documents\godina3\letnji\vp\vp_projekat\projekat\Client\bin\Debug\Common.dll
 C:\Users\Iva\Documents\godina3\letnji\vp\vp_projekat\projekat\Client\bin\Debug\Common.pdb
 C:\Users\Iva\Documents\godina3\letnji\vp\vp_projekat\projekat\Client\obj\Debug\Client.csproj.Up2Date
+C:\Users\Iva\Documents\godina3\letnji\vp\vp_projekat\projekat\Client\obj\Debug\Client.exe.config

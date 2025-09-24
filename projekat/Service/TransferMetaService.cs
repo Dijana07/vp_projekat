@@ -21,6 +21,11 @@ namespace Service
         private string poruka;
         private FileManipulation fileManipulationMesurments;
         private FileManipulation fileManipulationRejects;
+        private double lastTemperature;
+        private double meanTemperature;
+        private double lastRh;
+        private int count;
+        private double lastTdew;
 
         public event EventHandler OnTransferStarted;
         public event EventHandler<WeatherSampleEventArgs> OnSampleReceived;
@@ -35,6 +40,11 @@ namespace Service
             Directory.CreateDirectory(dataDirectory);
             fileManipulationMesurments = new FileManipulation(Path.Combine(dataDirectory, ConfigurationManager.AppSettings["validCSV"]));
             fileManipulationRejects = new FileManipulation(Path.Combine(dataDirectory, ConfigurationManager.AppSettings["rejectCSV"]));
+            lastTemperature = -300;
+            meanTemperature = 0;
+            lastRh = -300;
+            lastTdew = -300;
+            count = 0;
 
         }
 
@@ -50,8 +60,39 @@ namespace Service
 
         public bool PushSample(WeatherSample sample)
         {
-            // treba override to string
-            //Console.WriteLine("Transfering sample: " + sample);
+            if(lastTemperature != -300)
+            {
+                double tempDiff = Math.Abs(sample.T - lastTemperature);
+                double Tthreshold = double.TryParse(ConfigurationManager.AppSettings["T_threshold"], out Tthreshold) ? Tthreshold : 10.0;
+                if (tempDiff > Tthreshold)
+                {
+                   //PODICI DOGADJAJ TEMPERATURE SPIKE
+                }
+            }
+            count++;
+            meanTemperature = ((meanTemperature * (count - 1)) + sample.T) / count;
+            if(sample.T  < 0.75*meanTemperature || sample.T > 1.25 * meanTemperature)
+            {
+                //PODICI DOGADJAJ OutOfBandWarning
+            }
+            if (lastRh != -300)
+            {
+                double rhDiff = Math.Abs(sample.Rh - lastRh);
+                double RhThreshold = double.TryParse(ConfigurationManager.AppSettings["RH_threshold"], out RhThreshold) ? RhThreshold : 10.0;
+                if (rhDiff > RhThreshold)
+                {
+                    // PODICI DOGADJAJ RH SPIKE
+                }
+            }
+            if (lastTdew != -300)
+            {
+                double tdewDiff = Math.Abs(sample.Tdew - lastTdew);
+                double TdewThreshold = double.TryParse(ConfigurationManager.AppSettings["Tdew_threshold"], out TdewThreshold) ? TdewThreshold : 10.0;
+                if (tdewDiff > TdewThreshold)
+                {
+                    // PODICI DOGADJAJ TDEW SPIKE
+                }
+            }
             try
             {
                 if (fileManipulationMesurments.MemoryStream == null)
@@ -76,7 +117,7 @@ namespace Service
                    
                 if (sample.T < -50 || sample.T > 50)
                 {
-                    poruka = "Temperature must be in range -510 to 50"; 
+                    poruka = "Temperature must be in range -50 to 50"; 
                     throw new FaultException<DataFormatFault>(new DataFormatFault("Temperature must be in range -50 to 50"));
 
                 }
@@ -93,7 +134,11 @@ namespace Service
                     poruka = "Relative humidity must be in range 50-100";
                     throw new FaultException<DataFormatFault>(new DataFormatFault("Relative humidity must be in range 50-100"));
                 }
-                    
+                if(sample.T == 0 || sample.Pressure == 0 || sample.Tpot == 0 || sample.Tdew == 0 || sample.Rh == 0 || sample.Sh == 0 || sample.Date == null)
+                {
+                    poruka = "All parameters must be provided and non-zero";
+                    throw new FaultException<DataFormatFault>(new DataFormatFault("All parameters must be provided and non-zero"));
+                }  
 
                 //"T,Pressure,Tpot,Tdew,Rh,Sh,Date"
                 Console.WriteLine("\nValid sample received: {0}, {1}, {2}, {3}, {4}, {5}", sample.T, sample.Pressure, sample.Tpot, sample.Tdew, sample.Rh, sample.Sh);
@@ -124,8 +169,6 @@ namespace Service
                 string measurementsFile = Path.Combine(dataDirectory, ConfigurationManager.AppSettings["validCSV"]);
                 string rejectsFile = Path.Combine(dataDirectory, ConfigurationManager.AppSettings["rejectCSV"]);
 
-               /* measurementsWriter = new StreamWriter(measurementsFile, true);
-                rejectsWriter = new StreamWriter(rejectsFile, true);*/
 
                 if(new FileInfo(measurementsFile).Length == 0)
                 {

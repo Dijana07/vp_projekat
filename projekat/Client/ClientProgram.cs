@@ -26,11 +26,12 @@ namespace Client
             string relativeLogPath = ConfigurationManager.AppSettings["logFile"];
             string logPath = Path.GetFullPath(Path.Combine(basePath, relativeLogPath));
             Directory.CreateDirectory(Path.GetDirectoryName(logPath));
+            FileManipulation logWriter = new FileManipulation(logPath);
 
             int index = 0;
 
-            using (StreamWriter logWriter = new StreamWriter(logPath, true))
-            {
+            
+            
                 try
                 {
                     var samples = LoadFromCsv(filePath, logWriter);
@@ -50,7 +51,7 @@ namespace Client
                                     Console.WriteLine("You need to select existing option");
                                     break;
                                 case 1:
-                                    logWriter.WriteLine($"{DateTime.Now}: Session started.");
+                                    logWriter.MemoryStream.WriteLine($"{DateTime.Now}: Session started.");
                                     StartSession(proxy);
                                     break;
                                 case 2:
@@ -58,7 +59,7 @@ namespace Client
                                     index++;
                                     break;
                                 case 3:
-                                    logWriter.WriteLine($"{DateTime.Now}: Session ended.");
+                                    logWriter.MemoryStream.WriteLine($"{DateTime.Now}: Session ended.");
                                     EndSession(proxy);
                                     break;
                             }
@@ -67,15 +68,17 @@ namespace Client
                     }
                     catch (FaultException ex)
                     {
-                        logWriter.WriteLine("ERROR: Sample " + index + " " + ex.ToString());
+                        logWriter.MemoryStream.WriteLine("ERROR: Sample " + index + " " + ex.ToString());
                     }
                 }
                 catch (Exception ex)
                 {
-                    logWriter.WriteLine($"ERROR: {ex.Message}");
+                    logWriter.MemoryStream.WriteLine($"ERROR: {ex.Message}");
                 }
-            }
+              
+            logWriter.Dispose();
         }
+        
         
         static int PrintMenu()
         {
@@ -136,7 +139,7 @@ namespace Client
            
         }
 
-        static List<WeatherSample> LoadFromCsv(string csvPath, StreamWriter writer)
+        static List<WeatherSample> LoadFromCsv(string csvPath, FileManipulation writer)
         {
             var samples = new List<WeatherSample>();
 
@@ -146,11 +149,12 @@ namespace Client
             }
 
             int count = 0;
+            ReadFileManipulation reader = new ReadFileManipulation(csvPath);
             try
             {
-                using (var reader = new StreamReader(csvPath))
-                {
-                    string headerLine = reader.ReadLine();
+                
+                
+                    string headerLine = reader.MemoryStream.ReadLine();
                     if (headerLine == null)
                         throw new FaultException<DataFormatFault>(new DataFormatFault("CSV file is empty."));
 
@@ -166,9 +170,9 @@ namespace Client
                     if (tIdx < 0 || pressureIdx < 0 || tpotIdx < 0 || tdewIdx < 0 || rhIdx < 0 || shIdx < 0 || dateIdx < 0)
                         throw new InvalidDataException("CSV does not contain all required WeatherSample columns.");
 
-                    while (!reader.EndOfStream && count < 100)
+                    while (!reader.MemoryStream.EndOfStream && count < 100)
                     { 
-                        var line = reader.ReadLine();
+                        var line = reader.MemoryStream.ReadLine();
                         if (string.IsNullOrWhiteSpace(line))
                             continue;
 
@@ -194,24 +198,26 @@ namespace Client
                             }
                             else
                             {
-                                writer.WriteLine($"ERROR: At line {count}. Invalid number of columns.");
+                                writer.MemoryStream.WriteLine($"ERROR: At line {count}. Invalid number of columns.");
                             }
                         }
                         catch (FormatException ex)
                         {
-                            writer.WriteLine($"ERROR: At line {count}. Error: {ex.Message}");
+                            writer.MemoryStream.WriteLine($"ERROR: At line {count}. Error: {ex.Message}");
                         }
                         catch (Exception ex)
                         {
-                            writer.WriteLine($"ERROR: At line {count}. Error: {ex.Message}");
+                            writer.MemoryStream.WriteLine($"ERROR: At line {count}. Error: {ex.Message}");
                         }
+                        
                     }
-                }
+                
             }
             catch (Exception ex)
             {
-                writer.WriteLine($"ERROR: Error while reading CSV file. Error: {ex.Message}");
+                writer.MemoryStream.WriteLine($"ERROR: Error while reading CSV file. Error: {ex.Message}");
             }
+            reader.Dispose();
             return samples;
         }
     }

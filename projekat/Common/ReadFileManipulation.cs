@@ -8,21 +8,20 @@ using System.Threading.Tasks;
 
 namespace Common
 {
-    [DataContract]
-    public class FileManipulation : IDisposable
+    public class ReadFileManipulation : IDisposable
     {
-        public FileManipulation(string relPath)
+        public ReadFileManipulation(string relPath)
         {
-            this.MemoryStream = new StreamWriter(relPath, true);
+            this.MemoryStream = new StreamReader(relPath);
         }
 
-        public FileManipulation()
+        public ReadFileManipulation()
         {
             this.MemoryStream = null;
         }
 
         [DataMember]
-        public StreamWriter MemoryStream { get; set; }
+        public StreamReader MemoryStream { get; set; }
         private bool disposed = false;
 
         protected virtual void Dispose(bool disposing)
@@ -47,9 +46,10 @@ namespace Common
             GC.SuppressFinalize(this);
         }
 
-        ~FileManipulation()
+        ~ReadFileManipulation()
         {
             Dispose(false);
         }
     }
 }
+

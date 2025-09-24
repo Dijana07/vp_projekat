@@ -17,3 +17,15 @@
 24-Sep-25 01:29:36: Session ended.
 24-Sep-25 01:35:51: Session started.
 ERROR: Sample 0 System.ServiceModel.FaultException`1[Common.DataFormatFault]: The creator of this fault did not specify a Reason. (Fault Detail is equal to Common.DataFormatFault).
+ERROR: Error while reading CSV file. Error: Cannot read from a closed TextReader.
+24-Sep-25 08:14:56: Session started.
+ERROR: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+ERROR: Error while reading CSV file. Error: Cannot read from a closed TextReader.
+24-Sep-25 08:15:49: Session started.
+ERROR: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
+ERROR: Error while reading CSV file. Error: Cannot read from a closed TextReader.
+24-Sep-25 08:17:05: Session started.
+ERROR: Index was out of range. Must be non-negative and less than the size of the collection.
+Parameter name: index
