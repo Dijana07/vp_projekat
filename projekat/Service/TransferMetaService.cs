@@ -28,18 +28,22 @@ namespace Service
         private bool started = false;
         private bool ended = false;
 
-        public event EventHandler OnTransferStarted;
-        public event EventHandler<WeatherSampleEventArgs> OnSampleReceived;
-        public event EventHandler OnTransferCompleted;
-        public event EventHandler<WarningEventArgs> OnWarningRaised;
+        public delegate void WeatherEventHandler(object sender, WeatherSampleEventArgs e);
+        public delegate void WarningEventHandler(object sender, WarningEventArgs e);
+        public delegate void MyEventHandler(object sender, EventArgs e);
 
-        public event EventHandler OnTransferInProgress;
-        public event EventHandler OnTransferDone;
+        public event MyEventHandler OnTransferStarted;
+        public event WeatherEventHandler OnSampleReceived;
+        public event MyEventHandler OnTransferCompleted;
+        public event WarningEventHandler OnWarningRaised;
 
-        public event EventHandler<WarningEventArgs> OnTemperatureSpike;
-        public event EventHandler<WarningEventArgs> OnOutOfBandWarning;
-        public event EventHandler<WarningEventArgs> OnRHSpike;
-        public event EventHandler<WarningEventArgs> OnDEWSpike;
+        public event MyEventHandler OnTransferInProgress;
+        public event MyEventHandler OnTransferDone;
+
+        public event WarningEventHandler OnTemperatureSpike;
+        public event WarningEventHandler OnOutOfBandWarning;
+        public event WarningEventHandler OnRHSpike;
+        public event WarningEventHandler OnDEWSpike;
 
         public TransferMetaService()
         {
