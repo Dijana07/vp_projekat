@@ -25,7 +25,8 @@ namespace Service
         private double lastRh;
         private int count;
         private double lastTdew;
-        private bool started;
+        private bool started = false;
+        private bool ended = false;
 
         public event EventHandler OnTransferStarted;
         public event EventHandler<WeatherSampleEventArgs> OnSampleReceived;
@@ -58,12 +59,20 @@ namespace Service
 
         public bool EndSession()
         {
-            fileManipulationMesurments?.Dispose();
-            fileManipulationRejects?.Dispose();
-            started = false;
-            OnTransferCompleted?.Invoke(this, EventArgs.Empty);
+            // ako se na serveru klikne neko dugme
+            // pre zatvaranja ce on prekinuti sesiju
+            // pa treba da nekako oznacimo da li je sesija vec prekinuta
+            if (!ended)
+            {
+                fileManipulationMesurments?.Dispose();
+                fileManipulationRejects?.Dispose();
+                started = false;
+                ended = true;
+                OnTransferCompleted?.Invoke(this, EventArgs.Empty);
 
-            return true;
+                return true;
+            }
+            return false;
         }
 
         public bool PushSample(WeatherSample sample)
@@ -73,20 +82,24 @@ namespace Service
                 if (!started)
                 {
                     throw new FaultException<ValidationFault>(new ValidationFault("Session is not started."), new FaultReason("Session is not started."));
+
+                }
+
+                if (ended)
+                {
+                    throw new FaultException<ValidationFault>(new ValidationFault("Session ended."), new FaultReason("Session ended."));
                 }
 
                 if (fileManipulationMesurments.MemoryStream == null)
                 {
-                    throw new FaultException<ValidationFault>(new ValidationFault("Valid CSV file is not opened. Connection lost."), new FaultReason("Valid CSV file is not opened. Connection lost or session is not started."));
+                    throw new FaultException<ValidationFault>(new ValidationFault("Valid CSV file is not opened."), new FaultReason("Valid CSV file is not opened."));
                 }
                     
-
                 if (fileManipulationRejects.MemoryStream == null)
                 {
-                    throw new FaultException<ValidationFault>(new ValidationFault("Reject CSV file is not opened. Connection lost."), new FaultReason("Reject CSV file is not opened. Connection lost."));
+                    throw new FaultException<ValidationFault>(new ValidationFault("Reject CSV file is not opened."), new FaultReason("Reject CSV file is not opened."));
                 }
                     
-
                 if (sample.Date == DateTime.MinValue)
                 {
                     throw new FaultException<DataFormatFault>(new DataFormatFault("Invalid date."), new FaultReason("Invalid date."));
@@ -108,6 +121,7 @@ namespace Service
                 {
                     throw new FaultException<DataFormatFault>(new DataFormatFault("Relative humidity must be in range 50-100."), new FaultReason("Relative humidity must be in range 50-100."));
                 }
+
                 if(sample.T == 0 || sample.Pressure == 0 || sample.Tpot == 0 || sample.Tdew == 0 || sample.Rh == 0 || sample.Sh == 0 || sample.Date == null)
                 {
                     throw new FaultException<DataFormatFault>(new DataFormatFault("All parameters must be provided and non-zero"), new FaultReason("All parameters must be provided and non-zero."));
@@ -243,6 +257,7 @@ namespace Service
                 }
 
                 started = true;
+                ended = false;
                 OnTransferStarted?.Invoke(this, EventArgs.Empty);
 
                 return true;

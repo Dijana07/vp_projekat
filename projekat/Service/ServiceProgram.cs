@@ -14,9 +14,9 @@ namespace Service
         {
             var service = new TransferMetaService();
 
-            service.OnTransferStarted += (s, e) => Console.WriteLine("Event: Transfer started\n");
+            service.OnTransferStarted += (s, e) => Console.WriteLine("\nEvent: Transfer started\n");
             service.OnSampleReceived += (s, e) => Console.WriteLine($"\t\tSample received at {DateTime.Now}");
-            service.OnTransferCompleted += (s, e) => Console.WriteLine("Event: Transfer completed\n");
+            service.OnTransferCompleted += (s, e) => Console.WriteLine("\nEvent: Transfer completed\n");
             service.OnWarningRaised += (s, e) => Console.WriteLine($"\t\tWarning: {e.Message}");
             service.OnTransferInProgress += (s, e) => Console.WriteLine($"\tSample transfer in progress...");
             service.OnTransferDone += (s, e) => Console.WriteLine($"\tSample transfer done.\n");
