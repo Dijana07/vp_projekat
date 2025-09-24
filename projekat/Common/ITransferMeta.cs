@@ -11,7 +11,7 @@ namespace Common
     public interface ITransferMeta
     {
         [OperationContract]
-        [FaultContract(typeof(DataFormatFault))]
+        [FaultContract(typeof(ValidationFault))]
         bool StartSession(WeatherSample meta);
 
 
@@ -21,7 +21,7 @@ namespace Common
 
 
         [OperationContract]
-        [FaultContract(typeof(DataFormatFault))]
+        [FaultContract(typeof(ValidationFault))]
         bool EndSession();
     }
 }

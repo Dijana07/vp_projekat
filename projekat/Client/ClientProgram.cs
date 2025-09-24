@@ -99,10 +99,10 @@ namespace Client
 
         static void StartSession(ITransferMeta proxy)
         {
-            Console.WriteLine("--------Session started--------");
             try
             {
-                proxy.StartSession(new WeatherSample());
+                if (proxy.StartSession(new WeatherSample()))
+                    Console.WriteLine("--------Session started--------");
             }
             catch (FaultException ex)
             {
@@ -112,12 +112,10 @@ namespace Client
         }
         static void PushSample(ITransferMeta proxy, WeatherSample sample)
         {
-            Console.WriteLine("--------Sample pushed--------");
-            // moze da se doda to string override ali i ne mora
-            //Console.WriteLine(sample.ToString());
             try
             {
-                proxy.PushSample(sample);
+                if (proxy.PushSample(sample))
+                    Console.WriteLine("--------Sample pushed--------");
             }
             catch (FaultException ex)
             {
@@ -128,9 +126,9 @@ namespace Client
 
         static void EndSession(ITransferMeta proxy)
         {
-            Console.WriteLine("--------Session ended--------");
             try {
-                proxy.EndSession();
+                if (proxy.EndSession())
+                    Console.WriteLine("--------Session ended--------");
             }
             catch (FaultException ex)
             {

@@ -18,7 +18,6 @@ namespace Service
         private string dataDirectory;
         private StreamWriter measurementsWriter;
         private StreamWriter rejectsWriter;
-        private string poruka;
         private FileManipulation fileManipulationMesurments;
         private FileManipulation fileManipulationRejects;
         private double lastTemperature;
@@ -26,11 +25,20 @@ namespace Service
         private double lastRh;
         private int count;
         private double lastTdew;
+        private bool started;
 
         public event EventHandler OnTransferStarted;
         public event EventHandler<WeatherSampleEventArgs> OnSampleReceived;
         public event EventHandler OnTransferCompleted;
         public event EventHandler<WarningEventArgs> OnWarningRaised;
+
+        public event EventHandler OnTransferInProgress;
+        public event EventHandler OnTransferDone;
+
+        public event EventHandler<WarningEventArgs> OnTemperatureSpike;
+        public event EventHandler<WarningEventArgs> OnOutOfBandWarning;
+        public event EventHandler<WarningEventArgs> OnRHSpike;
+        public event EventHandler<WarningEventArgs> OnDEWSpike;
 
         public TransferMetaService()
         {
@@ -45,150 +53,209 @@ namespace Service
             lastRh = -300;
             lastTdew = -300;
             count = 0;
-
+            
         }
 
         public bool EndSession()
         {
             fileManipulationMesurments?.Dispose();
             fileManipulationRejects?.Dispose();
-
+            started = false;
             OnTransferCompleted?.Invoke(this, EventArgs.Empty);
 
             return true;
         }
 
         public bool PushSample(WeatherSample sample)
-        {
-            if(lastTemperature != -300)
-            {
-                double tempDiff = Math.Abs(sample.T - lastTemperature);
-                double Tthreshold = double.TryParse(ConfigurationManager.AppSettings["T_threshold"], out Tthreshold) ? Tthreshold : 10.0;
-                if (tempDiff > Tthreshold)
-                {
-                   //PODICI DOGADJAJ TEMPERATURE SPIKE
-                }
-            }
-            count++;
-            meanTemperature = ((meanTemperature * (count - 1)) + sample.T) / count;
-            if(sample.T  < 0.75*meanTemperature || sample.T > 1.25 * meanTemperature)
-            {
-                //PODICI DOGADJAJ OutOfBandWarning
-            }
-            if (lastRh != -300)
-            {
-                double rhDiff = Math.Abs(sample.Rh - lastRh);
-                double RhThreshold = double.TryParse(ConfigurationManager.AppSettings["RH_threshold"], out RhThreshold) ? RhThreshold : 10.0;
-                if (rhDiff > RhThreshold)
-                {
-                    // PODICI DOGADJAJ RH SPIKE
-                }
-            }
-            if (lastTdew != -300)
-            {
-                double tdewDiff = Math.Abs(sample.Tdew - lastTdew);
-                double TdewThreshold = double.TryParse(ConfigurationManager.AppSettings["Tdew_threshold"], out TdewThreshold) ? TdewThreshold : 10.0;
-                if (tdewDiff > TdewThreshold)
-                {
-                    // PODICI DOGADJAJ TDEW SPIKE
-                }
-            }
+        {   
             try
             {
+                if (!started)
+                {
+                    throw new FaultException<ValidationFault>(new ValidationFault("Session is not started."), new FaultReason("Session is not started."));
+                }
+
                 if (fileManipulationMesurments.MemoryStream == null)
                 {
-                    poruka = "Session not started.";
-                    throw new FaultException<DataFormatFault>(new DataFormatFault("Session not started."));
+                    throw new FaultException<ValidationFault>(new ValidationFault("Valid CSV file is not opened. Connection lost."), new FaultReason("Valid CSV file is not opened. Connection lost or session is not started."));
                 }
                     
 
                 if (fileManipulationRejects.MemoryStream == null)
                 {
-                    poruka = "Session not started.";
-                    throw new FaultException<DataFormatFault>(new DataFormatFault("Session not started."));
+                    throw new FaultException<ValidationFault>(new ValidationFault("Reject CSV file is not opened. Connection lost."), new FaultReason("Reject CSV file is not opened. Connection lost."));
                 }
                     
 
                 if (sample.Date == DateTime.MinValue)
                 {
-                    poruka = "Invalid date";
-                    throw new FaultException<DataFormatFault>(new DataFormatFault("Invalid date"));
+                    throw new FaultException<DataFormatFault>(new DataFormatFault("Invalid date."), new FaultReason("Invalid date."));
                 }
                    
                 if (sample.T < -50 || sample.T > 50)
                 {
-                    poruka = "Temperature must be in range -50 to 50"; 
-                    throw new FaultException<DataFormatFault>(new DataFormatFault("Temperature must be in range -50 to 50"));
+                    throw new FaultException<DataFormatFault>(new DataFormatFault("Temperature must be in range -50 to 50."), new FaultReason("Temperature must be in range -50 to 50."));
 
                 }
 
                 if (sample.Rh <= 0)
                 {
-                    poruka = "Relative humidity must be positive";
-                    throw new FaultException<DataFormatFault>(new DataFormatFault("Relative humidity must be positive"));
+                    throw new FaultException<DataFormatFault>(new DataFormatFault("Relative humidity must be positive."), new FaultReason("Relative humidity must be positive."));
                 }
                     
 
                 if (sample.Rh < 50 || sample.Rh > 100)
                 {
-                    poruka = "Relative humidity must be in range 50-100";
-                    throw new FaultException<DataFormatFault>(new DataFormatFault("Relative humidity must be in range 50-100"));
+                    throw new FaultException<DataFormatFault>(new DataFormatFault("Relative humidity must be in range 50-100."), new FaultReason("Relative humidity must be in range 50-100."));
                 }
                 if(sample.T == 0 || sample.Pressure == 0 || sample.Tpot == 0 || sample.Tdew == 0 || sample.Rh == 0 || sample.Sh == 0 || sample.Date == null)
                 {
-                    poruka = "All parameters must be provided and non-zero";
-                    throw new FaultException<DataFormatFault>(new DataFormatFault("All parameters must be provided and non-zero"));
+                    throw new FaultException<DataFormatFault>(new DataFormatFault("All parameters must be provided and non-zero"), new FaultReason("All parameters must be provided and non-zero."));
                 }  
 
                 //"T,Pressure,Tpot,Tdew,Rh,Sh,Date"
-                Console.WriteLine("\nValid sample received: {0}, {1}, {2}, {3}, {4}, {5}", sample.T, sample.Pressure, sample.Tpot, sample.Tdew, sample.Rh, sample.Sh);
                 fileManipulationMesurments.MemoryStream.WriteLine($"{sample.T},{sample.Pressure},{sample.Tpot},{sample.Tdew},{sample.Rh},{sample.Sh},{sample.Date}");
                 fileManipulationMesurments.MemoryStream.Flush();
 
+                OnTransferInProgress?.Invoke(this, EventArgs.Empty);
                 OnSampleReceived?.Invoke(this, new WeatherSampleEventArgs(sample));
 
+                if (lastTemperature != -300)
+                {
+                    double tempDiff = Math.Abs(sample.T - lastTemperature);
+                    double Tthreshold = double.TryParse(ConfigurationManager.AppSettings["T_threshold"], out Tthreshold) ? Tthreshold : 10.0;
+                    if (tempDiff > Tthreshold)
+                    {
+                        if (sample.T - lastTemperature < 0)
+                            OnTemperatureSpike?.Invoke(this, new WarningEventArgs("Temperature is lower than excpected."));
+                        else
+                            OnTemperatureSpike?.Invoke(this, new WarningEventArgs("Temperature is higher than excpected."));
+                    }
+                }
+                lastTemperature = sample.T;
+                count++;
+                meanTemperature = ((meanTemperature * (count - 1)) + sample.T) / count;
+                if (sample.T < 0.75 * meanTemperature)
+                {
+                    OnOutOfBandWarning?.Invoke(this, new WarningEventArgs("Mean temperature is lower than excpected."));
+                }
+
+                if (sample.T > 1.25 * meanTemperature)
+                {
+                    OnOutOfBandWarning?.Invoke(this, new WarningEventArgs("Mean temperature is higher than excpected."));
+                }
+
+                if (lastRh != -300)
+                {
+                    double rhDiff = Math.Abs(sample.Rh - lastRh);
+                    double RhThreshold = double.TryParse(ConfigurationManager.AppSettings["RH_threshold"], out RhThreshold) ? RhThreshold : 10.0;
+                    if (rhDiff > RhThreshold)
+                    {
+                        if (sample.Rh - lastRh < 0)
+                            OnRHSpike?.Invoke(this, new WarningEventArgs("RH is lower than excpected."));
+                        else
+                            OnRHSpike?.Invoke(this, new WarningEventArgs("RH is higher than excpected."));
+                    }
+                }
+                lastRh = sample.Rh;
+                if (lastTdew != -300)
+                {
+                    double tdewDiff = Math.Abs(sample.Tdew - lastTdew);
+                    double TdewThreshold = double.TryParse(ConfigurationManager.AppSettings["Tdew_threshold"], out TdewThreshold) ? TdewThreshold : 10.0;
+                    if (tdewDiff > TdewThreshold)
+                    {
+                        if (sample.Tdew - lastTdew < 0)
+                            OnDEWSpike?.Invoke(this, new WarningEventArgs("DEW is lower than excpected."));
+                        else
+                            OnDEWSpike?.Invoke(this, new WarningEventArgs("DEW is higher than excpected."));
+                    }
+                }
+                lastTdew = sample.Tdew;
+
+                Console.WriteLine("\t\tValid sample received: {0}, {1}, {2}, {3}, {4}, {5}", sample.T, sample.Pressure, sample.Tpot, sample.Tdew, sample.Rh, sample.Sh);
+                OnTransferDone?.Invoke(this, EventArgs.Empty);
+
                 return true;
+            }
+            // za simulaciju pokusaja slanja pre nego sto se pokrene sesisja
+            // zakomentarisati ovo i Exception ex
+            catch (FaultException<ValidationFault> ex)
+            {
+                OnWarningRaised?.Invoke(this, new WarningEventArgs(ex.Message));
+                return false;
+            }
+            catch (FaultException<DataFormatFault> ex)
+            {
+                //"T,Pressure,Tpot,Tdew,Rh,Sh,Date"
+                
+                fileManipulationRejects.MemoryStream.WriteLine($"{sample.T},{sample.Pressure},{sample.Tpot},{sample.Tdew},{sample.Rh},{sample.Sh},{sample.Date},{ex.Message}");
+                fileManipulationRejects.MemoryStream.Flush();
+
+                OnTransferInProgress?.Invoke(this, EventArgs.Empty);
+                OnSampleReceived?.Invoke(this, new WeatherSampleEventArgs(sample));
+                OnWarningRaised?.Invoke(this, new WarningEventArgs(ex.Message));
+                OnTransferDone?.Invoke(this, EventArgs.Empty);
+
+                return false;
             }
             catch (Exception ex)
             {
                 //"T,Pressure,Tpot,Tdew,Rh,Sh,Date"
-                
-                fileManipulationRejects.MemoryStream.WriteLine($"{sample.T},{sample.Pressure},{sample.Tpot},{sample.Tdew},{sample.Rh},{sample.Sh},{sample.Date},{poruka}");
-                fileManipulationRejects.MemoryStream.Flush();
 
-                OnWarningRaised?.Invoke(this, new WarningEventArgs(poruka));
-                throw new FaultException<DataFormatFault>(new DataFormatFault(ex.Message));
+                //fileManipulationRejects.MemoryStream.WriteLine($"{sample.T},{sample.Pressure},{sample.Tpot},{sample.Tdew},{sample.Rh},{sample.Sh},{sample.Date},{ex.Message}");
+                //fileManipulationRejects.MemoryStream.Flush();
+
+                OnTransferInProgress?.Invoke(this, EventArgs.Empty);
+                //OnSampleReceived?.Invoke(this, new WeatherSampleEventArgs(sample));
+                OnWarningRaised?.Invoke(this, new WarningEventArgs(ex.Message));
+                OnTransferDone?.Invoke(this, EventArgs.Empty);
+
+                return false;
             }
         }
 
         public bool StartSession(WeatherSample meta)
         {
-           
+
             try
             {
+                if (ConfigurationManager.AppSettings["validCSV"] == null)
+                {
+                    throw new FaultException<ValidationFault>(new ValidationFault("Path for valid CSV file not found."), new FaultReason("Path for valid CSV file not found."));
+                }
+
+                if (ConfigurationManager.AppSettings["rejectCSV"] == null)
+                {
+                    throw new FaultException<ValidationFault>(new ValidationFault("Path for reject CSV file not found."), new FaultReason("Path for reject CSV file not found."));
+                }
+
                 string measurementsFile = Path.Combine(dataDirectory, ConfigurationManager.AppSettings["validCSV"]);
                 string rejectsFile = Path.Combine(dataDirectory, ConfigurationManager.AppSettings["rejectCSV"]);
 
 
-                if(new FileInfo(measurementsFile).Length == 0)
+                if (new FileInfo(measurementsFile).Length == 0)
                 {
                     fileManipulationMesurments.MemoryStream.WriteLine("T,Pressure,Tpot,Tdew,Rh,Sh,Date");
                 }
-                if(new FileInfo(rejectsFile).Length == 0)
+                if (new FileInfo(rejectsFile).Length == 0)
                 {
                     fileManipulationRejects.MemoryStream.WriteLine("T,Pressure,Tpot,Tdew,Rh,Sh,Date,Error");
                 }
-                   
 
-
+                started = true;
                 OnTransferStarted?.Invoke(this, EventArgs.Empty);
 
                 return true;
             }
+            catch (FaultException<ValidationFault> ex)
+            {
+                OnWarningRaised?.Invoke(this, new WarningEventArgs(ex.Message));
+                return false;
+            }
             catch (Exception ex)
             {
                 OnWarningRaised?.Invoke(this, new WarningEventArgs(ex.Message));
-                throw new FaultException<DataFormatFault>(new DataFormatFault(ex.Message));
+                return false;
             }
         }
 

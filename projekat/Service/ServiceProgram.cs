@@ -12,22 +12,26 @@ namespace Service
     {
         static void Main(string[] args)
         {
-            // nisam sigurna jel dobro ovo za pretplate
             var service = new TransferMetaService();
 
-            // mozda ovde da se promeni
-            // transfer in progress..
-            // transfer ended
-            service.OnTransferStarted += (s, e) => Console.WriteLine("Event: Transfer started");
-            service.OnSampleReceived += (s, e) => Console.WriteLine($"Event: Sample received at {DateTime.Now}");
-            service.OnTransferCompleted += (s, e) => Console.WriteLine("Event: Transfer completed");
-            service.OnWarningRaised += (s, e) => Console.WriteLine($"Event: Warning: {e.Message}");
+            service.OnTransferStarted += (s, e) => Console.WriteLine("Event: Transfer started\n");
+            service.OnSampleReceived += (s, e) => Console.WriteLine($"\t\tSample received at {DateTime.Now}");
+            service.OnTransferCompleted += (s, e) => Console.WriteLine("Event: Transfer completed\n");
+            service.OnWarningRaised += (s, e) => Console.WriteLine($"\t\tWarning: {e.Message}");
+            service.OnTransferInProgress += (s, e) => Console.WriteLine($"\tSample transfer in progress...");
+            service.OnTransferDone += (s, e) => Console.WriteLine($"\tSample transfer done.\n");
+
+            service.OnTemperatureSpike += (s, e) => Console.WriteLine($"\t\tTemperature spiked: {e.Message}");
+            service.OnOutOfBandWarning += (s, e) => Console.WriteLine($"\t\tOut of band: {e.Message}");
+            service.OnDEWSpike += (s, e) => Console.WriteLine($"\t\tDEW spiked: {e.Message}");
+            service.OnRHSpike += (s, e) => Console.WriteLine($"\t\tRH spiked: {e.Message}");
 
             using (ServiceHost host = new ServiceHost(service))
             {
                 host.Open();
-                Console.WriteLine("Service is open, press any key to close it.");
+                Console.WriteLine("Service is open, press any key to close it.\n");
                 Console.ReadKey();
+                service.EndSession();
                 host.Close();
             }
             Console.WriteLine("Service is closed");

@@ -29,3 +29,21 @@ ERROR: Error while reading CSV file. Error: Cannot read from a closed TextReader
 24-Sep-25 08:17:05: Session started.
 ERROR: Index was out of range. Must be non-negative and less than the size of the collection.
 Parameter name: index
+9/24/2025 11:06:51: Session started.
+ERROR: Could not connect to net.tcp://localhost:4002/MetaTransferingService. The connection attempt lasted for a time span of 00:00:04.0635458. TCP error code 10061: No connection could be made because the target machine actively refused it 127.0.0.1:4002. 
+9/24/2025 11:07:07: Session started.
+ERROR: Could not connect to net.tcp://localhost:4002/MetaTransferingService. The connection attempt lasted for a time span of 00:00:04.0879591. TCP error code 10061: No connection could be made because the target machine actively refused it 127.0.0.1:4002. 
+9/24/2025 11:58:32: Session started.
+9/24/2025 11:59:48: Session started.
+9/24/2025 11:59:51: Session ended.
+9/24/2025 12:00:24: Session started.
+ERROR: Could not connect to net.tcp://localhost:4002/MetaTransferingService. The connection attempt lasted for a time span of 00:00:04.0789403. TCP error code 10061: No connection could be made because the target machine actively refused it 127.0.0.1:4002. 
+9/24/2025 12:24:10: Session started.
+ERROR: Could not connect to net.tcp://localhost:4002/MetaTransferingService. The connection attempt lasted for a time span of 00:00:04.0677078. TCP error code 10061: No connection could be made because the target machine actively refused it 127.0.0.1:4002. 
+9/24/2025 12:25:48: Session started.
+ERROR: Could not connect to net.tcp://localhost:4002/MetaTransferingService. The connection attempt lasted for a time span of 00:00:04.0668053. TCP error code 10061: No connection could be made because the target machine actively refused it 127.0.0.1:4002. 
+9/24/2025 12:26:39: Session started.
+ERROR: Could not connect to net.tcp://localhost:4002/MetaTransferingService. The connection attempt lasted for a time span of 00:00:04.0610838. TCP error code 10061: No connection could be made because the target machine actively refused it 127.0.0.1:4002. 
+9/24/2025 12:30:06: Session started.
+ERROR: Could not connect to net.tcp://localhost:4002/MetaTransferingService. The connection attempt lasted for a time span of 00:00:04.0626165. TCP error code 10061: No connection could be made because the target machine actively refused it 127.0.0.1:4002. 
+9/24/2025 12:31:12: Session started.
