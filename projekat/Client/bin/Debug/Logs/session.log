@@ -4,3 +4,16 @@
 9/14/2025 14:43:53: Session ended.
 9/14/2025 15:30:12: Session started.
 9/14/2025 15:30:37: Session ended.
+24-Sep-25 00:41:20: Session started.
+24-Sep-25 00:41:23: Session ended.
+24-Sep-25 00:54:49: Session started.
+24-Sep-25 00:54:52: Session ended.
+24-Sep-25 00:56:49: Session started.
+24-Sep-25 00:57:14: Session ended.
+24-Sep-25 00:57:46: Session ended.
+24-Sep-25 00:58:58: Session started.
+24-Sep-25 00:59:02: Session ended.
+24-Sep-25 01:29:31: Session started.
+24-Sep-25 01:29:36: Session ended.
+24-Sep-25 01:35:51: Session started.
+ERROR: Sample 0 System.ServiceModel.FaultException`1[Common.DataFormatFault]: The creator of this fault did not specify a Reason. (Fault Detail is equal to Common.DataFormatFault).

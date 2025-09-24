@@ -23,3 +23,16 @@ G:\vp\projekat\projekat\Service\obj\Debug\Service.csproj.CoreCompileInputs.cache
 G:\vp\projekat\projekat\Service\obj\Debug\Service.csproj.Up2Date
 G:\vp\projekat\projekat\Service\obj\Debug\Service.exe
 G:\vp\projekat\projekat\Service\obj\Debug\Service.pdb
+C:\Users\Iva\Documents\godina3\letnji\vp\vp_projekat\projekat\Service\bin\Debug\Service.exe.config
+C:\Users\Iva\Documents\godina3\letnji\vp\vp_projekat\projekat\Service\bin\Debug\Service.exe
+C:\Users\Iva\Documents\godina3\letnji\vp\vp_projekat\projekat\Service\bin\Debug\Service.pdb
+C:\Users\Iva\Documents\godina3\letnji\vp\vp_projekat\projekat\Service\bin\Debug\Common.dll
+C:\Users\Iva\Documents\godina3\letnji\vp\vp_projekat\projekat\Service\bin\Debug\System.Configuration.ConfigurationManager.dll
+C:\Users\Iva\Documents\godina3\letnji\vp\vp_projekat\projekat\Service\bin\Debug\Common.pdb
+C:\Users\Iva\Documents\godina3\letnji\vp\vp_projekat\projekat\Service\bin\Debug\System.Configuration.ConfigurationManager.xml
+C:\Users\Iva\Documents\godina3\letnji\vp\vp_projekat\projekat\Service\obj\Debug\Service.csproj.AssemblyReference.cache
+C:\Users\Iva\Documents\godina3\letnji\vp\vp_projekat\projekat\Service\obj\Debug\Service.csproj.CoreCompileInputs.cache
+C:\Users\Iva\Documents\godina3\letnji\vp\vp_projekat\projekat\Service\obj\Debug\Service.csproj.Up2Date
+C:\Users\Iva\Documents\godina3\letnji\vp\vp_projekat\projekat\Service\obj\Debug\Service.exe
+C:\Users\Iva\Documents\godina3\letnji\vp\vp_projekat\projekat\Service\obj\Debug\Service.pdb
+C:\Users\Iva\Documents\godina3\letnji\vp\vp_projekat\projekat\Service\obj\Debug\Service.exe.config

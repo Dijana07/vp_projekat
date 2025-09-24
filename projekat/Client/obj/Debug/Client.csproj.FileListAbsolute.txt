@@ -26,3 +26,6 @@ G:\vp\projekat\projekat\Client\obj\Debug\Client.csproj.CoreCompileInputs.cache
 G:\vp\projekat\projekat\Client\obj\Debug\Client.csproj.Up2Date
 G:\vp\projekat\projekat\Client\obj\Debug\Client.exe
 G:\vp\projekat\projekat\Client\obj\Debug\Client.pdb
+C:\Users\Iva\Documents\godina3\letnji\vp\vp_projekat\projekat\Client\bin\Debug\Common.dll
+C:\Users\Iva\Documents\godina3\letnji\vp\vp_projekat\projekat\Client\bin\Debug\Common.pdb
+C:\Users\Iva\Documents\godina3\letnji\vp\vp_projekat\projekat\Client\obj\Debug\Client.csproj.Up2Date

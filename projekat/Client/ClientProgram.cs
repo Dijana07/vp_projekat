@@ -15,6 +15,7 @@ namespace Client
     {
         static void Main(string[] args)
         {
+
             ChannelFactory<ITransferMeta> factory = new ChannelFactory<ITransferMeta>("TransferMetaService");
             ITransferMeta proxy = factory.CreateChannel();
             int selectedNumber;
@@ -96,21 +97,43 @@ namespace Client
         static void StartSession(ITransferMeta proxy)
         {
             Console.WriteLine("--------Session started--------");
-            proxy.StartSession(new WeatherSample());
-        }
+            try
+            {
+                proxy.StartSession(new WeatherSample());
+            }
+            catch (FaultException ex)
+            {
+                Console.WriteLine("ERROR: " + ex.ToString());
 
+            }
+        }
         static void PushSample(ITransferMeta proxy, WeatherSample sample)
         {
             Console.WriteLine("--------Sample pushed--------");
             // moze da se doda to string override ali i ne mora
             //Console.WriteLine(sample.ToString());
-            proxy.PushSample(sample);
+            try
+            {
+                proxy.PushSample(sample);
+            }
+            catch (FaultException ex)
+            {
+                Console.WriteLine("ERROR: " + ex.ToString());
+
+            }
         }
 
         static void EndSession(ITransferMeta proxy)
         {
             Console.WriteLine("--------Session ended--------");
-            proxy.EndSession();
+            try {
+                proxy.EndSession();
+            }
+            catch (FaultException ex)
+            {
+                Console.WriteLine("ERROR: " + ex.ToString());
+            }
+           
         }
 
         static List<WeatherSample> LoadFromCsv(string csvPath, StreamWriter writer)

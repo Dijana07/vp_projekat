@@ -11,38 +11,44 @@ namespace Common
     [DataContract]
     public class FileManipulation : IDisposable
     {
-        public FileManipulation(MemoryStream memomoryStream, string keyWord)
+        public FileManipulation(string relPath)
         {
-            this.MemomoryStream = memomoryStream;
-            this.KeyWord = keyWord;
+            this.MemoryStream = new StreamWriter(relPath, true);
         }
 
-        public FileManipulation(string keyWord)
+        public FileManipulation()
         {
-            this.MemomoryStream = null;
-            this.KeyWord = keyWord;
+            this.MemoryStream = null;
         }
 
         [DataMember]
-        public MemoryStream MemomoryStream { get; set; }
+        public StreamWriter MemoryStream { get; set; }
+        private bool disposed = false;
 
-        [DataMember]
-        public string KeyWord { get; set; }
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    if (MemoryStream != null)
+                    {
+                        MemoryStream.Dispose();
+                    }
+                }
+                disposed = true;
+            }
+        }
 
         public void Dispose()
         {
-            if (MemomoryStream == null)
-                return;
-            try
-            {
-                MemomoryStream.Dispose();
-                MemomoryStream.Close();
-                MemomoryStream = null;
-            }
-            catch (Exception)
-            {
-                Console.WriteLine("Unsuccesful disposing!");
-            }
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        ~FileManipulation()
+        {
+            Dispose(false);
         }
     }
 }

@@ -13,12 +13,14 @@ namespace Service
 {
     //ConcurrencyMode.Multiple moze da se doda da bi vise klijenaya moglo da salje podatke istovremeno
     [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
-    public class TransferMetaService : ITransferMeta, IDisposable
+    public class TransferMetaService : ITransferMeta
     {
         private string dataDirectory;
         private StreamWriter measurementsWriter;
         private StreamWriter rejectsWriter;
-        private bool disposing = true;
+        private string poruka;
+        private FileManipulation fileManipulationMesurments;
+        private FileManipulation fileManipulationRejects;
 
         public event EventHandler OnTransferStarted;
         public event EventHandler<WeatherSampleEventArgs> OnSampleReceived;
@@ -31,13 +33,15 @@ namespace Service
             var basePath = AppDomain.CurrentDomain.BaseDirectory; 
             dataDirectory = Path.GetFullPath(Path.Combine(basePath, relativePath));
             Directory.CreateDirectory(dataDirectory);
+            fileManipulationMesurments = new FileManipulation(Path.Combine(dataDirectory, ConfigurationManager.AppSettings["validCSV"]));
+            fileManipulationRejects = new FileManipulation(Path.Combine(dataDirectory, ConfigurationManager.AppSettings["rejectCSV"]));
+
         }
 
         public bool EndSession()
         {
-            //Console.WriteLine("Transfer completed.");
-            disposing = true;
-            DisposeWriters();
+            fileManipulationMesurments?.Dispose();
+            fileManipulationRejects?.Dispose();
 
             OnTransferCompleted?.Invoke(this, EventArgs.Empty);
 
@@ -50,24 +54,51 @@ namespace Service
             //Console.WriteLine("Transfering sample: " + sample);
             try
             {
-                if (measurementsWriter == null)
+                if (fileManipulationMesurments.MemoryStream == null)
+                {
+                    poruka = "Session not started.";
                     throw new FaultException<DataFormatFault>(new DataFormatFault("Session not started."));
+                }
+                    
 
-                if (rejectsWriter == null)
+                if (fileManipulationRejects.MemoryStream == null)
+                {
+                    poruka = "Session not started.";
                     throw new FaultException<DataFormatFault>(new DataFormatFault("Session not started."));
+                }
+                    
 
                 if (sample.Date == DateTime.MinValue)
-                    throw new FaultException<ValidationFault>(new ValidationFault("Invalid date"));
+                {
+                    poruka = "Invalid date";
+                    throw new FaultException<DataFormatFault>(new DataFormatFault("Invalid date"));
+                }
+                   
+                if (sample.T < -50 || sample.T > 50)
+                {
+                    poruka = "Temperature must be in range -510 to 50"; 
+                    throw new FaultException<DataFormatFault>(new DataFormatFault("Temperature must be in range -50 to 50"));
+
+                }
 
                 if (sample.Rh <= 0)
-                    throw new FaultException<ValidationFault>(new ValidationFault("Relative humidity must be positive"));
+                {
+                    poruka = "Relative humidity must be positive";
+                    throw new FaultException<DataFormatFault>(new DataFormatFault("Relative humidity must be positive"));
+                }
+                    
 
                 if (sample.Rh < 50 || sample.Rh > 100)
-                    throw new FaultException<ValidationFault>(new ValidationFault("Relative humidity must be in range 50-100"));
+                {
+                    poruka = "Relative humidity must be in range 50-100";
+                    throw new FaultException<DataFormatFault>(new DataFormatFault("Relative humidity must be in range 50-100"));
+                }
+                    
 
                 //"T,Pressure,Tpot,Tdew,Rh,Sh,Date"
-                measurementsWriter.WriteLine($"{sample.T},{sample.Pressure},{sample.Tpot},{sample.Tdew},{sample.Rh},{sample.Sh},{sample.Date}");
-                measurementsWriter.Flush();
+                Console.WriteLine("\nValid sample received: {0}, {1}, {2}, {3}, {4}, {5}", sample.T, sample.Pressure, sample.Tpot, sample.Tdew, sample.Rh, sample.Sh);
+                fileManipulationMesurments.MemoryStream.WriteLine($"{sample.T},{sample.Pressure},{sample.Tpot},{sample.Tdew},{sample.Rh},{sample.Sh},{sample.Date}");
+                fileManipulationMesurments.MemoryStream.Flush();
 
                 OnSampleReceived?.Invoke(this, new WeatherSampleEventArgs(sample));
 
@@ -76,29 +107,36 @@ namespace Service
             catch (Exception ex)
             {
                 //"T,Pressure,Tpot,Tdew,Rh,Sh,Date"
-                rejectsWriter.WriteLine($"{sample.T},{sample.Pressure},{sample.Tpot},{sample.Tdew},{sample.Rh},{sample.Sh},{sample.Date}, {ex.Message}");
-                rejectsWriter.Flush();
+                
+                fileManipulationRejects.MemoryStream.WriteLine($"{sample.T},{sample.Pressure},{sample.Tpot},{sample.Tdew},{sample.Rh},{sample.Sh},{sample.Date},{poruka}");
+                fileManipulationRejects.MemoryStream.Flush();
 
-                OnWarningRaised?.Invoke(this, new WarningEventArgs(ex.Message));
+                OnWarningRaised?.Invoke(this, new WarningEventArgs(poruka));
                 throw new FaultException<DataFormatFault>(new DataFormatFault(ex.Message));
             }
         }
 
         public bool StartSession(WeatherSample meta)
         {
-            //Console.WriteLine("Session started");
-            //Console.WriteLine("Transfer in progress...");
-            disposing = false;
+           
             try
             {
                 string measurementsFile = Path.Combine(dataDirectory, ConfigurationManager.AppSettings["validCSV"]);
                 string rejectsFile = Path.Combine(dataDirectory, ConfigurationManager.AppSettings["rejectCSV"]);
 
-                measurementsWriter = new StreamWriter(measurementsFile, true);
-                rejectsWriter = new StreamWriter(rejectsFile, true);
+               /* measurementsWriter = new StreamWriter(measurementsFile, true);
+                rejectsWriter = new StreamWriter(rejectsFile, true);*/
 
-                measurementsWriter.WriteLine("T,Pressure,Tpot,Tdew,Rh,Sh,Date");
-                rejectsWriter.WriteLine("T,Pressure,Tpot,Tdew,Rh,Sh,Date, Error");
+                if(new FileInfo(measurementsFile).Length == 0)
+                {
+                    fileManipulationMesurments.MemoryStream.WriteLine("T,Pressure,Tpot,Tdew,Rh,Sh,Date");
+                }
+                if(new FileInfo(rejectsFile).Length == 0)
+                {
+                    fileManipulationRejects.MemoryStream.WriteLine("T,Pressure,Tpot,Tdew,Rh,Sh,Date,Error");
+                }
+                   
+
 
                 OnTransferStarted?.Invoke(this, EventArgs.Empty);
 
@@ -111,42 +149,6 @@ namespace Service
             }
         }
 
-        private void DisposeWriters()
-        {
-            if (disposing)
-            {
-                if (measurementsWriter != null)
-                {
-                    try
-                    {
-                        measurementsWriter.Dispose();
-                        measurementsWriter.Close();
-                        measurementsWriter = null;
-                    }
-                    catch (Exception ex)
-                    {
-                        OnWarningRaised?.Invoke(this, new WarningEventArgs(ex.Message));
-                    }
-                }
-                if (rejectsWriter != null)
-                {
-                    try
-                    {
-                        rejectsWriter.Dispose();
-                        rejectsWriter.Close();
-                        rejectsWriter = null;
-                    }
-                    catch (Exception ex)
-                    {
-                        OnWarningRaised?.Invoke(this, new WarningEventArgs(ex.Message));
-                    }
-                }
-            }
-        }
-
-        public void Dispose()
-        {
-            DisposeWriters();
-        }
+        
     }
 }
