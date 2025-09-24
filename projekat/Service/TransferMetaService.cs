@@ -1,13 +1,8 @@
 ﻿using Common;
 using System;
-using System.Collections.Generic;
 using System.Configuration;
-using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.ServiceModel;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Service
 {
@@ -48,7 +43,7 @@ namespace Service
         public TransferMetaService()
         {
             var relativePath = ConfigurationManager.AppSettings["DataDirectory"];
-            var basePath = AppDomain.CurrentDomain.BaseDirectory; 
+            var basePath = AppDomain.CurrentDomain.BaseDirectory;
             dataDirectory = Path.GetFullPath(Path.Combine(basePath, relativePath));
             Directory.CreateDirectory(dataDirectory);
             fileManipulationMesurments = new FileManipulation(Path.Combine(dataDirectory, ConfigurationManager.AppSettings["validCSV"]));
@@ -58,7 +53,7 @@ namespace Service
             lastRh = -300;
             lastTdew = -300;
             count = 0;
-            
+
         }
 
         public bool EndSession()
@@ -72,7 +67,7 @@ namespace Service
                 fileManipulationRejects?.Dispose();
                 started = false;
                 ended = true;
-                OnTransferCompleted?.Invoke(this, EventArgs.Empty);
+                OnTransferCompleted(this, EventArgs.Empty);
 
                 return true;
             }
@@ -80,7 +75,7 @@ namespace Service
         }
 
         public bool PushSample(WeatherSample sample)
-        {   
+        {
             try
             {
                 if (!started)
@@ -98,17 +93,17 @@ namespace Service
                 {
                     throw new FaultException<ValidationFault>(new ValidationFault("Valid CSV file is not opened."), new FaultReason("Valid CSV file is not opened."));
                 }
-                    
+
                 if (fileManipulationRejects.MemoryStream == null)
                 {
                     throw new FaultException<ValidationFault>(new ValidationFault("Reject CSV file is not opened."), new FaultReason("Reject CSV file is not opened."));
                 }
-                    
+
                 if (sample.Date == DateTime.MinValue)
                 {
                     throw new FaultException<DataFormatFault>(new DataFormatFault("Invalid date."), new FaultReason("Invalid date."));
                 }
-                   
+
                 if (sample.T < -50 || sample.T > 50)
                 {
                     throw new FaultException<DataFormatFault>(new DataFormatFault("Temperature must be in range -50 to 50."), new FaultReason("Temperature must be in range -50 to 50."));
@@ -119,24 +114,24 @@ namespace Service
                 {
                     throw new FaultException<DataFormatFault>(new DataFormatFault("Relative humidity must be positive."), new FaultReason("Relative humidity must be positive."));
                 }
-                    
+
 
                 if (sample.Rh < 50 || sample.Rh > 100)
                 {
                     throw new FaultException<DataFormatFault>(new DataFormatFault("Relative humidity must be in range 50-100."), new FaultReason("Relative humidity must be in range 50-100."));
                 }
 
-                if(sample.T == 0 || sample.Pressure == 0 || sample.Tpot == 0 || sample.Tdew == 0 || sample.Rh == 0 || sample.Sh == 0 || sample.Date == null)
+                if (sample.T == 0 || sample.Pressure == 0 || sample.Tpot == 0 || sample.Tdew == 0 || sample.Rh == 0 || sample.Sh == 0 || sample.Date == null)
                 {
                     throw new FaultException<DataFormatFault>(new DataFormatFault("All parameters must be provided and non-zero"), new FaultReason("All parameters must be provided and non-zero."));
-                }  
+                }
 
                 //"T,Pressure,Tpot,Tdew,Rh,Sh,Date"
                 fileManipulationMesurments.MemoryStream.WriteLine($"{sample.T},{sample.Pressure},{sample.Tpot},{sample.Tdew},{sample.Rh},{sample.Sh},{sample.Date}");
                 fileManipulationMesurments.MemoryStream.Flush();
 
-                OnTransferInProgress?.Invoke(this, EventArgs.Empty);
-                OnSampleReceived?.Invoke(this, new WeatherSampleEventArgs(sample));
+                OnTransferInProgress(this, EventArgs.Empty);
+                OnSampleReceived(this, new WeatherSampleEventArgs(sample));
 
                 if (lastTemperature != -300)
                 {
@@ -145,9 +140,9 @@ namespace Service
                     if (tempDiff > Tthreshold)
                     {
                         if (sample.T - lastTemperature < 0)
-                            OnTemperatureSpike?.Invoke(this, new WarningEventArgs("Temperature is lower than excpected."));
+                            OnTemperatureSpike(this, new WarningEventArgs("Temperature is lower than excpected."));
                         else
-                            OnTemperatureSpike?.Invoke(this, new WarningEventArgs("Temperature is higher than excpected."));
+                            OnTemperatureSpike(this, new WarningEventArgs("Temperature is higher than excpected."));
                     }
                 }
                 lastTemperature = sample.T;
@@ -155,12 +150,12 @@ namespace Service
                 meanTemperature = ((meanTemperature * (count - 1)) + sample.T) / count;
                 if (sample.T < 0.75 * meanTemperature)
                 {
-                    OnOutOfBandWarning?.Invoke(this, new WarningEventArgs("Mean temperature is lower than excpected."));
+                    OnOutOfBandWarning(this, new WarningEventArgs("Mean temperature is lower than excpected."));
                 }
 
                 if (sample.T > 1.25 * meanTemperature)
                 {
-                    OnOutOfBandWarning?.Invoke(this, new WarningEventArgs("Mean temperature is higher than excpected."));
+                    OnOutOfBandWarning(this, new WarningEventArgs("Mean temperature is higher than excpected."));
                 }
 
                 if (lastRh != -300)
@@ -170,9 +165,9 @@ namespace Service
                     if (rhDiff > RhThreshold)
                     {
                         if (sample.Rh - lastRh < 0)
-                            OnRHSpike?.Invoke(this, new WarningEventArgs("RH is lower than excpected."));
+                            OnRHSpike(this, new WarningEventArgs("RH is lower than excpected."));
                         else
-                            OnRHSpike?.Invoke(this, new WarningEventArgs("RH is higher than excpected."));
+                            OnRHSpike(this, new WarningEventArgs("RH is higher than excpected."));
                     }
                 }
                 lastRh = sample.Rh;
@@ -183,15 +178,15 @@ namespace Service
                     if (tdewDiff > TdewThreshold)
                     {
                         if (sample.Tdew - lastTdew < 0)
-                            OnDEWSpike?.Invoke(this, new WarningEventArgs("DEW is lower than excpected."));
+                            OnDEWSpike(this, new WarningEventArgs("DEW is lower than excpected."));
                         else
-                            OnDEWSpike?.Invoke(this, new WarningEventArgs("DEW is higher than excpected."));
+                            OnDEWSpike(this, new WarningEventArgs("DEW is higher than excpected."));
                     }
                 }
                 lastTdew = sample.Tdew;
 
                 Console.WriteLine("\t\tValid sample received: {0}, {1}, {2}, {3}, {4}, {5}", sample.T, sample.Pressure, sample.Tpot, sample.Tdew, sample.Rh, sample.Sh);
-                OnTransferDone?.Invoke(this, EventArgs.Empty);
+                OnTransferDone(this, EventArgs.Empty);
 
                 return true;
             }
@@ -199,20 +194,20 @@ namespace Service
             // zakomentarisati ovo i Exception ex
             catch (FaultException<ValidationFault> ex)
             {
-                OnWarningRaised?.Invoke(this, new WarningEventArgs(ex.Message));
+                OnWarningRaised(this, new WarningEventArgs(ex.Message));
                 return false;
             }
             catch (FaultException<DataFormatFault> ex)
             {
                 //"T,Pressure,Tpot,Tdew,Rh,Sh,Date"
-                
+
                 fileManipulationRejects.MemoryStream.WriteLine($"{sample.T},{sample.Pressure},{sample.Tpot},{sample.Tdew},{sample.Rh},{sample.Sh},{sample.Date},{ex.Message}");
                 fileManipulationRejects.MemoryStream.Flush();
 
-                OnTransferInProgress?.Invoke(this, EventArgs.Empty);
-                OnSampleReceived?.Invoke(this, new WeatherSampleEventArgs(sample));
-                OnWarningRaised?.Invoke(this, new WarningEventArgs(ex.Message));
-                OnTransferDone?.Invoke(this, EventArgs.Empty);
+                OnTransferInProgress(this, EventArgs.Empty);
+                OnSampleReceived(this, new WeatherSampleEventArgs(sample));
+                OnWarningRaised(this, new WarningEventArgs(ex.Message));
+                OnTransferDone(this, EventArgs.Empty);
 
                 return false;
             }
@@ -223,10 +218,10 @@ namespace Service
                 //fileManipulationRejects.MemoryStream.WriteLine($"{sample.T},{sample.Pressure},{sample.Tpot},{sample.Tdew},{sample.Rh},{sample.Sh},{sample.Date},{ex.Message}");
                 //fileManipulationRejects.MemoryStream.Flush();
 
-                OnTransferInProgress?.Invoke(this, EventArgs.Empty);
-                //OnSampleReceived?.Invoke(this, new WeatherSampleEventArgs(sample));
-                OnWarningRaised?.Invoke(this, new WarningEventArgs(ex.Message));
-                OnTransferDone?.Invoke(this, EventArgs.Empty);
+                OnTransferInProgress(this, EventArgs.Empty);
+                //OnSampleReceived(this, new WeatherSampleEventArgs(sample));
+                OnWarningRaised(this, new WarningEventArgs(ex.Message));
+                OnTransferDone(this, EventArgs.Empty);
 
                 return false;
             }
@@ -262,22 +257,22 @@ namespace Service
 
                 started = true;
                 ended = false;
-                OnTransferStarted?.Invoke(this, EventArgs.Empty);
+                OnTransferStarted(this, EventArgs.Empty);
 
                 return true;
             }
             catch (FaultException<ValidationFault> ex)
             {
-                OnWarningRaised?.Invoke(this, new WarningEventArgs(ex.Message));
+                OnWarningRaised(this, new WarningEventArgs(ex.Message));
                 return false;
             }
             catch (Exception ex)
             {
-                OnWarningRaised?.Invoke(this, new WarningEventArgs(ex.Message));
+                OnWarningRaised(this, new WarningEventArgs(ex.Message));
                 return false;
             }
         }
 
-        
+
     }
 }
