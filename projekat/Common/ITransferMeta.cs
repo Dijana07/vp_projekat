@@ -12,6 +12,7 @@ namespace Common
 
         [OperationContract]
         [FaultContract(typeof(DataFormatFault))]
+        [FaultContract(typeof(ValidationFault))]
         bool PushSample(WeatherSample sample);
 
 

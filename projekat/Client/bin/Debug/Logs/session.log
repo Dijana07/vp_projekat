@@ -55,3 +55,7 @@ ERROR: Could not connect to net.tcp://localhost:4002/MetaTransferingService. The
 9/24/2025 16:34:17: Session ended.
 9/24/2025 16:44:44: Session started.
 9/24/2025 16:44:52: Session ended.
+9/25/2025 22:25:27: Session started.
+ERROR: Could not connect to net.tcp://localhost:4002/MetaTransferingService. The connection attempt lasted for a time span of 00:00:04.0781330. TCP error code 10061: No connection could be made because the target machine actively refused it 127.0.0.1:4002. 
+9/25/2025 22:27:27: Session started.
+9/25/2025 22:27:40: Session ended.

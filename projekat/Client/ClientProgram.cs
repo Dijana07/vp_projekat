@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
 using System.IO;
+using System.Reflection;
 using System.ServiceModel;
 
 namespace Client
@@ -34,39 +35,42 @@ namespace Client
                 var samples = LoadFromCsv(filePath, logWriter);
                 if (samples == null || samples.Count == 0)
                 {
-                    throw new FaultException<DataFormatFault>(new DataFormatFault("ERROR: CSV file empty or samples not loaded."));
+                    throw new FaultException<ValidationFault>(new ValidationFault("ERROR: CSV file empty or samples not loaded."));
                 }
 
-                try
+                do
                 {
-                    do
+                    selectedNumber = PrintMenu();
+                    switch (selectedNumber)
                     {
-                        selectedNumber = PrintMenu();
-                        switch (selectedNumber)
-                        {
-                            case 0:
-                                Console.WriteLine("You need to select existing option");
-                                break;
-                            case 1:
-                                logWriter.MemoryStream.WriteLine($"{DateTime.Now}: Session started.");
-                                StartSession(proxy);
-                                break;
-                            case 2:
-                                PushSample(proxy, samples[index]);
-                                index++;
-                                break;
-                            case 3:
-                                logWriter.MemoryStream.WriteLine($"{DateTime.Now}: Session ended.");
-                                EndSession(proxy);
-                                break;
-                        }
+                        case 0:
+                            Console.WriteLine("You need to select existing option");
+                            break;
+                        case 1:
+                            logWriter.MemoryStream.WriteLine($"{DateTime.Now}: Session started.");
+                            StartSession(proxy);
+                            break;
+                        case 2:
+                            PushSample(proxy, samples[index]);
+                            index++;
+                            break;
+                        case 3:
+                            logWriter.MemoryStream.WriteLine($"{DateTime.Now}: Session ended.");
+                            EndSession(proxy);
+                            break;
                     }
-                    while (selectedNumber != 4);
                 }
-                catch (FaultException ex)
-                {
-                    logWriter.MemoryStream.WriteLine("ERROR: Sample " + index + " " + ex.ToString());
-                }
+                while (selectedNumber != 4);
+                
+                
+            }
+            catch (FaultException<ValidationFault> ex)
+            {
+                logWriter.MemoryStream.WriteLine("ERROR: " + ex.ToString());
+            }
+            catch (FaultException<DataFormatFault> ex)
+            {
+                logWriter.MemoryStream.WriteLine("ERROR: Sample " + index + " " + ex.ToString());
             }
             catch (Exception ex)
             {
@@ -101,10 +105,9 @@ namespace Client
                 if (proxy.StartSession(new WeatherSample()))
                     Console.WriteLine("--------Session started--------");
             }
-            catch (FaultException ex)
+            catch (FaultException<ValidationFault> ex)
             {
                 Console.WriteLine("ERROR: " + ex.ToString());
-
             }
         }
         static void PushSample(ITransferMeta proxy, WeatherSample sample)
@@ -113,11 +116,14 @@ namespace Client
             {
                 if (proxy.PushSample(sample))
                     Console.WriteLine("--------Sample pushed--------");
-            }
-            catch (FaultException ex)
+            }          
+            catch (FaultException<ValidationFault> ex)
             {
                 Console.WriteLine("ERROR: " + ex.ToString());
-
+            }
+            catch (FaultException<DataFormatFault> ex)
+            {
+                Console.WriteLine("ERROR: " + ex.ToString());
             }
         }
 
@@ -128,7 +134,11 @@ namespace Client
                 if (proxy.EndSession())
                     Console.WriteLine("--------Session ended--------");
             }
-            catch (FaultException ex)
+            catch (FaultException<ValidationFault> ex)
+            {
+                Console.WriteLine("ERROR: " + ex.ToString());
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine("ERROR: " + ex.ToString());
             }

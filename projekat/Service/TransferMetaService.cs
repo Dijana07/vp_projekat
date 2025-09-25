@@ -67,7 +67,8 @@ namespace Service
                 fileManipulationRejects?.Dispose();
                 started = false;
                 ended = true;
-                OnTransferCompleted(this, EventArgs.Empty);
+                if (OnTransferCompleted != null)
+                    OnTransferCompleted(this, EventArgs.Empty);
 
                 return true;
             }
@@ -130,8 +131,11 @@ namespace Service
                 fileManipulationMesurments.MemoryStream.WriteLine($"{sample.T},{sample.Pressure},{sample.Tpot},{sample.Tdew},{sample.Rh},{sample.Sh},{sample.Date}");
                 fileManipulationMesurments.MemoryStream.Flush();
 
-                OnTransferInProgress(this, EventArgs.Empty);
-                OnSampleReceived(this, new WeatherSampleEventArgs(sample));
+                if (OnTransferInProgress != null)
+                    OnTransferInProgress(this, EventArgs.Empty);
+
+                if (OnSampleReceived != null)
+                    OnSampleReceived(this, new WeatherSampleEventArgs(sample));
 
                 if (lastTemperature != -300)
                 {
@@ -139,10 +143,16 @@ namespace Service
                     double Tthreshold = double.TryParse(ConfigurationManager.AppSettings["T_threshold"], out Tthreshold) ? Tthreshold : 10.0;
                     if (tempDiff > Tthreshold)
                     {
-                        if (sample.T - lastTemperature < 0)
-                            OnTemperatureSpike(this, new WarningEventArgs("Temperature is lower than excpected."));
+                        if (sample.T < lastTemperature)
+                        {
+                            if (OnTemperatureSpike != null)
+                                OnTemperatureSpike(this, new WarningEventArgs("Temperature is lower than excpected."));
+                        }
                         else
-                            OnTemperatureSpike(this, new WarningEventArgs("Temperature is higher than excpected."));
+                        {
+                            if (OnTemperatureSpike != null)
+                                OnTemperatureSpike(this, new WarningEventArgs("Temperature is higher than excpected."));
+                        }
                     }
                 }
                 lastTemperature = sample.T;
@@ -150,12 +160,14 @@ namespace Service
                 meanTemperature = ((meanTemperature * (count - 1)) + sample.T) / count;
                 if (sample.T < 0.75 * meanTemperature)
                 {
-                    OnOutOfBandWarning(this, new WarningEventArgs("Mean temperature is lower than excpected."));
+                    if (OnOutOfBandWarning != null)
+                        OnOutOfBandWarning(this, new WarningEventArgs("Mean temperature is lower than excpected."));
                 }
 
                 if (sample.T > 1.25 * meanTemperature)
                 {
-                    OnOutOfBandWarning(this, new WarningEventArgs("Mean temperature is higher than excpected."));
+                    if (OnOutOfBandWarning != null)
+                        OnOutOfBandWarning(this, new WarningEventArgs("Mean temperature is higher than excpected."));
                 }
 
                 if (lastRh != -300)
@@ -164,10 +176,16 @@ namespace Service
                     double RhThreshold = double.TryParse(ConfigurationManager.AppSettings["RH_threshold"], out RhThreshold) ? RhThreshold : 10.0;
                     if (rhDiff > RhThreshold)
                     {
-                        if (sample.Rh - lastRh < 0)
-                            OnRHSpike(this, new WarningEventArgs("RH is lower than excpected."));
+                        if (sample.Rh < lastRh)
+                        {
+                            if (OnRHSpike != null)
+                                OnRHSpike(this, new WarningEventArgs("RH is lower than excpected."));
+                        }
                         else
-                            OnRHSpike(this, new WarningEventArgs("RH is higher than excpected."));
+                        {
+                            if (OnRHSpike != null)
+                                OnRHSpike(this, new WarningEventArgs("RH is higher than excpected."));
+                        }
                     }
                 }
                 lastRh = sample.Rh;
@@ -177,16 +195,23 @@ namespace Service
                     double TdewThreshold = double.TryParse(ConfigurationManager.AppSettings["Tdew_threshold"], out TdewThreshold) ? TdewThreshold : 10.0;
                     if (tdewDiff > TdewThreshold)
                     {
-                        if (sample.Tdew - lastTdew < 0)
-                            OnDEWSpike(this, new WarningEventArgs("DEW is lower than excpected."));
+                        if (sample.Tdew < lastTdew)
+                        {
+                            if (OnDEWSpike != null)
+                                OnDEWSpike(this, new WarningEventArgs("DEW is lower than excpected."));
+                        }
                         else
-                            OnDEWSpike(this, new WarningEventArgs("DEW is higher than excpected."));
+                        {
+                            if (OnDEWSpike != null)
+                                OnDEWSpike(this, new WarningEventArgs("DEW is higher than excpected."));
+                        }
                     }
                 }
                 lastTdew = sample.Tdew;
 
                 Console.WriteLine("\t\tValid sample received: {0}, {1}, {2}, {3}, {4}, {5}", sample.T, sample.Pressure, sample.Tpot, sample.Tdew, sample.Rh, sample.Sh);
-                OnTransferDone(this, EventArgs.Empty);
+                if (OnTransferDone != null)
+                    OnTransferDone(this, EventArgs.Empty);
 
                 return true;
             }
@@ -194,7 +219,8 @@ namespace Service
             // zakomentarisati ovo i Exception ex
             catch (FaultException<ValidationFault> ex)
             {
-                OnWarningRaised(this, new WarningEventArgs(ex.Message));
+                if (OnWarningRaised != null)
+                    OnWarningRaised(this, new WarningEventArgs(ex.Message));
                 return false;
             }
             catch (FaultException<DataFormatFault> ex)
@@ -204,10 +230,17 @@ namespace Service
                 fileManipulationRejects.MemoryStream.WriteLine($"{sample.T},{sample.Pressure},{sample.Tpot},{sample.Tdew},{sample.Rh},{sample.Sh},{sample.Date},{ex.Message}");
                 fileManipulationRejects.MemoryStream.Flush();
 
-                OnTransferInProgress(this, EventArgs.Empty);
-                OnSampleReceived(this, new WeatherSampleEventArgs(sample));
-                OnWarningRaised(this, new WarningEventArgs(ex.Message));
-                OnTransferDone(this, EventArgs.Empty);
+                if (OnTransferInProgress != null)
+                    OnTransferInProgress(this, EventArgs.Empty);
+
+                if (OnSampleReceived != null)
+                    OnSampleReceived(this, new WeatherSampleEventArgs(sample));
+
+                if (OnWarningRaised != null)
+                    OnWarningRaised(this, new WarningEventArgs(ex.Message));
+
+                if (OnTransferDone != null)
+                    OnTransferDone(this, EventArgs.Empty);
 
                 return false;
             }
@@ -218,10 +251,14 @@ namespace Service
                 //fileManipulationRejects.MemoryStream.WriteLine($"{sample.T},{sample.Pressure},{sample.Tpot},{sample.Tdew},{sample.Rh},{sample.Sh},{sample.Date},{ex.Message}");
                 //fileManipulationRejects.MemoryStream.Flush();
 
-                OnTransferInProgress(this, EventArgs.Empty);
+                if (OnTransferInProgress != null)
+                    OnTransferInProgress(this, EventArgs.Empty);
                 //OnSampleReceived(this, new WeatherSampleEventArgs(sample));
-                OnWarningRaised(this, new WarningEventArgs(ex.Message));
-                OnTransferDone(this, EventArgs.Empty);
+                if (OnWarningRaised != null)
+                    OnWarningRaised(this, new WarningEventArgs(ex.Message));
+
+                if (OnTransferDone != null)
+                    OnTransferDone(this, EventArgs.Empty);
 
                 return false;
             }
@@ -257,18 +294,21 @@ namespace Service
 
                 started = true;
                 ended = false;
-                OnTransferStarted(this, EventArgs.Empty);
+                if (OnTransferStarted != null)
+                    OnTransferStarted(this, EventArgs.Empty);
 
                 return true;
             }
             catch (FaultException<ValidationFault> ex)
             {
-                OnWarningRaised(this, new WarningEventArgs(ex.Message));
+                if (OnWarningRaised != null)
+                    OnWarningRaised(this, new WarningEventArgs(ex.Message));
                 return false;
             }
             catch (Exception ex)
             {
-                OnWarningRaised(this, new WarningEventArgs(ex.Message));
+                if (OnWarningRaised != null)
+                    OnWarningRaised(this, new WarningEventArgs(ex.Message));
                 return false;
             }
         }
